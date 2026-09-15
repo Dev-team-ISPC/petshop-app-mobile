@@ -1,56 +1,114 @@
-# 🐾 Programador web - Sistema de Gestión - PetShop App
-Proyecto grupal para el módulo "programador web" de la tecnicatura en desarrollo web y aplicaciones digitales del ISPC . Está compuesto por tres espacios curriculares: Programación Web II, Programación II y Desarrollo de Software.
+# 🐾 Petshop App Mobile 
 
-##  Equipo de Desarrollo
-* LAUTARO NAHUEL ANCILLOTTI   | http://github.com/lnancillotti
-* CLAUDIO NICOLAS AUDICIO  | http://github.com/NicolasAudicio
-* ELIZABETH NORMA J. CHIALVA  | http://github.com/ElizabethChialva-22
-* LAURA MOLINA  | http://github.com/lauritam7
-* ADRIAN NICOLAS TELLO  | http://github.com/ANIKO4
-* MATIAS IBARRA  | http://github.com/MatiasRaulIbarra
-* FRANCISCO JUNCO  | http://github.com/FranJL075
+Proyecto integrador de la Tecnicatura Superior en Desarrollo Web y Aplicaciones Digitales del ISPC, Modulo de Aplicaciones Digitales. La aplicación propone una libreta digital para mascotas que permite centralizar y consultar de forma portátil la información de cada animal, sus vacunas, turnos y registros relevantes, con acceso diferenciado para clientes, veterinarios y administradores.
 
-##  Descripción del proyecto
-Muchos dueños de mascotas enfrentan dificultades para organizar las vacunas, turnos y compras de sus animales. Por otro lado, las veterinarias pequeñas suelen llevar sus registros en papel, lo que genera pérdida de datos. Esta aplicación busca centralizar la gestión de mascotas y productos en una sola plataforma web.
+## Equipo de desarrollo
 
-##  Tecnologías Utilizadas
-* **Frontend:** Angular 21 - Boostrap 5
-* **Backend:** Django 6 - Django REST Framework
-* **Base de Datos:** MySQL 
-* **Gestión de Entorno:** Python-dotenv para seguridad de credenciales.
+| Integrante | GitHub |
+|---|---|
+| Claudio Nicolas Audicio | [NicolasAudicio](https://github.com/NicolasAudicio) |
+| Francisco Junco | [FranJL075](https://github.com/FranJL075) |
+| Lautaro Ancillotti | [lnancillotti](https://github.com/lnancillotti) |
+| Maximiliano Fernandez | [lanusroots](https://github.com/lanusroots) |
+| Carlos Ferri del Castillo | [Carlos-Ferri-Del-Castillo](https://github.com/Carlos-Ferri-Del-Castillo) |
+| Cesar Ramiro Ruggieri | [subrami22](https://github.com/subrami22) |
 
-## Requerimientos 
+## Objetivo
 
-### Requerimientos Funcionales
-1. **Registro de Mascotas:** El sistema debe permitir al usuario registrar una mascota con nombre, especie, raza, edad y peso, y mostrar un mensaje de confirmación tras el registro exitoso.
-2. **Catálogo de Productos:** Permitir al usuario gestionar la selección de artículos en un carrito de compras y calcular el monto total de la operación según el stock disponible. 
-3. **Registro de Usuarios:** El sistema debe permitir al usuario registrar una cuenta con nombre, email único y contraseña de al menos 8 caracteres, rechazando el registro si el email ya existe.
-4. **Contacto:** El sistema debe permitir al usuario enviar un mensaje de contacto con nombre, email válido y texto de al menos 10 caracteres, confirmando el envío mediante un mensaje visible en pantalla.
-5. **Quiénes Somos:** El sistema deberá permitir al usuario consultar la información institucional de la Pet Shop mediante la sección “Quiénes Somos” disponible en la barra de navegación.
-6. **Acceso por Roles:** El sistema debe mostrar al usuario autenticado un panel personalizado según su rol (administrador, cliente o veterinario), con opciones y datos distintos para cada perfil.
+Facilitar el seguimiento y la trazabilidad de la salud y los cuidados de las mascotas mediante una aplicación accesible desde dispositivos móviles. El sistema busca reemplazar registros dispersos o en papel, mantener la información organizada y permitir que cada usuario acceda únicamente a las funciones y datos autorizados para su rol.
 
-### Requerimientos No Funcionales
-1. **Seguridad:** El sistema debe garantizar que las credenciales de la base de datos no sean accesibles en el repositorio público, almacenándolas en variables de entorno definidas en un archivo `.env` excluido del control de versiones, de modo que cualquier intento de acceso al repositorio no exponga datos sensibles.
-2. **Arquitectura:** El sistema debe responder a cualquier solicitud de la API en menos de 500 milisegundos bajo condiciones normales de uso (un usuario concurrente en entorno local), medido desde el envío de la petición hasta la recepción de la respuesta.
-3. **Responsive** El sistema debe adaptarse correctamente a pantallas de ancho mínimo 320px y máximo 1920px, verificable mediante pruebas, sin pérdida de contenido ni superposición de elementos.
+## Funcionalidades
 
-## Instalación y Configuración
+- Registro e inicio de sesión de usuarios.
+- Acceso diferenciado por roles: cliente, veterinario y administrador.
+- Registro y consulta de mascotas.
+- Consulta del carnet o libreta digital de cada mascota.
+- Registro y seguimiento de vacunaciones y próximas dosis.
+- Gestión de turnos veterinarios.
+- Consulta de productos.
+- Pantallas institucionales de inicio, contacto y quiénes somos.
+- Administración de usuarios y productos.
+
+## Tecnologías utilizadas
+
+- **Frontend:** Angular 21, TypeScript, HTML y CSS.
+- **Backend:** Django 6 y Django REST Framework.
+- **Base de datos:** MySQL.
+- **Seguridad de configuración:** variables de entorno mediante `python-dotenv`.
+- **Gestión del proyecto:** Git, GitHub Issues, Milestones, Projects y Wiki.
+
+## Estructura del proyecto
+
+```text
+petshop-app-mobile/
+├── backend/    # API REST, modelos, autenticación y base de datos
+└── frontend/   # Interfaz, rutas, componentes y servicios
+```
+
+## Requerimientos funcionales principales
+
+1. Registrar usuarios con correo único y contraseña válida.
+2. Iniciar y cerrar sesión.
+3. Mostrar funciones diferentes según el rol.
+4. Registrar y consultar mascotas.
+5. Consultar la libreta digital de una mascota.
+6. Consultar y registrar vacunaciones y próximas dosis.
+7. Consultar y gestionar turnos veterinarios.
+8. Consultar productos.
+9. Enviar mensajes desde Contacto.
+10. Gestionar usuarios y productos como administrador.
+
+## Requerimientos no funcionales principales
+
+- Compatibilidad con Android 5 o superior cuando se empaquete como aplicación móvil.
+- Secretos en variables de entorno y fuera del repositorio.
+- Contraseñas almacenadas mediante hash.
+- Autenticación y autorización en endpoints privados.
+- Validación de propiedad de recursos y roles en el backend.
+- CORS restringido a entornos autorizados.
+- Navegación con regreso desde pantallas hijas.
+- Interfaz adaptable desde 320 px.
+
+## Instalación y ejecución
 
 ### Backend
-1. Navegar a la carpeta `backend`.
-2. Instalar dependencias: `pip install -r requirements.txt` (o manualmente las librerías mencionadas).
-3. Crear un archivo `.env` basado en el `.env_modelo`.
-4. Ejecutar migraciones: `python manage.py migrate`.
+
+```bash
+cd backend
+python -m venv .venv
+```
+
+Luego, activar el entorno virtual y ejecutar:
+
+```bash
+pip install -r requirements.txt
+cp .env_modelo .env
+python manage.py migrate
+python manage.py runserver
+```
 
 ### Frontend
-1. Navegar a la carpeta `frontend`.
-2. Instalar dependencias: `npm install`.
-3. Ejecutar servidor: `ng serve -o`.
 
- Metodología de Trabajo
+```bash
+cd frontend
+npm install
+npm start
+```
 
-El desarrollo del proyecto se realizó de forma colaborativa, utilizando control de versiones con Git y GitHub, distribución de tareas por módulos y reuniones periódicas para seguimiento del avance, integración y pruebas generales del sistema.
+## Organización Scrum
 
-Estado del Proyecto
+El trabajo se organiza mediante Product Backlog, Sprint Backlog, Issues, Milestones y un tablero Kanban con los estados `Product Backlog`, `To Do`, `In Progress`, `Testing (QA)` y `Done`. Las ceremonias Planning, Daily Scrum, Review y Retrospective se documentan en la Wiki de cada sprint.
 
-Actualmente la aplicación se encuentra en fase funcional inicial, cumpliendo con los requerimientos planteados en la primera etapa, con posibilidad de continuar escalando nuevas funcionalidades en futuras evidencias o versiones.
+## Repositorios relacionados
+
+- [AplicacionMovil](https://github.com/Dev-team-ISPC/AplicacionMovil): actividades y prácticas de Aplicaciones Móviles.
+- [petshop-app](https://github.com/Dev-team-ISPC/petshop-app): proyecto del módulo Programador Web del primer cuatrimestre.
+- [petshop-app-mobile](https://github.com/Dev-team-ISPC/petshop-app-mobile): repositorio principal de Proyecto Integrador II.
+
+## Documentación
+
+La Wiki reúne la documentación de Sprint 0 y Sprint 1, las ceremonias Scrum, el Plan de Pruebas, los Test Cases, el Plan de Seguridad y el enlace al documento IEEE 830.
+
+## Estado del proyecto
+
+El proyecto se encuentra en desarrollo incremental. La navegación, los modelos principales y parte de las funcionalidades ya están presentes. La migración de la autenticación propia a JWT, el refuerzo de la autorización por propietario y rol y las restantes medidas del Plan de Seguridad se encuentran planificados para las siguientes iteraciones.
