@@ -1,0 +1,1729 @@
+{
+  "info": {
+    "name": "Petshop App Mobile — API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Contrato de la API. Ejecutar primero Login para que se guarden los tokens."
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access}}"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000/api"
+    },
+    {
+      "key": "access",
+      "value": ""
+    },
+    {
+      "key": "refresh",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Autenticación",
+      "item": [
+        {
+          "name": "Registro",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/registro/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "registro"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"nuevo@petshop.test\",\n  \"nombre\": \"Nuevo Usuario\",\n  \"telefono\": \"3510000000\",\n  \"direccion\": \"Calle 123\",\n  \"password\": \"Petshop2026!\",\n  \"acepta_terminos\": true\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Login (cliente)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"cliente@petshop.test\",\n  \"password\": \"Petshop2026!\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json();",
+                  "pm.environment.set('access', d.access);",
+                  "pm.environment.set('refresh', d.refresh);",
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login (veterinario)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"vet@petshop.test\",\n  \"password\": \"Petshop2026!\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json();",
+                  "pm.environment.set('access', d.access);",
+                  "pm.environment.set('refresh', d.refresh);",
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Login (admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@petshop.test\",\n  \"password\": \"Petshop2026!\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const d = pm.response.json();",
+                  "pm.environment.set('access', d.access);",
+                  "pm.environment.set('refresh', d.refresh);",
+                  "pm.test('status 200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Refresh",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/refresh/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "refresh"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh\": \"{{refresh}}\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/logout/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "logout"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refresh\": \"{{refresh}}\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Mi perfil",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/me/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Editar mi perfil",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/me/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"telefono\": \"3519999999\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar mi cuenta",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/me/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "me"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Usuarios (admin)",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "usuarios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "usuarios"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"vet2@petshop.test\",\n  \"nombre\": \"Dr. Suárez\",\n  \"rol\": \"veterinario\",\n  \"password\": \"Petshop2026!\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Detalle",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "usuarios",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Modificar",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "usuarios",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"telefono\": \"3511234567\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "usuarios",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Veterinarios (selector)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/veterinarios/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "usuarios",
+                "veterinarios"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mascotas",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Pelusa\",\n  \"especie\": \"conejo\",\n  \"raza\": \"Belier\",\n  \"peso\": \"2.10\",\n  \"fecha_nacimiento\": \"2024-05-01\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Detalle",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Modificar",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"peso\": \"29.00\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Vacunaciones de la mascota",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/1/vacunaciones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas",
+                "1",
+                "vacunaciones"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Turnos de la mascota",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/1/turnos/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas",
+                "1",
+                "turnos"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Vacunas y vacunaciones",
+      "item": [
+        {
+          "name": "Catálogo de vacunas",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/vacunas/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "vacunas"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Crear vacuna (vet/admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/vacunas/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "vacunas"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Antigripal\",\n  \"descripcion\": \"Prevención estacional.\",\n  \"frecuencia\": \"anual\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Listar vacunaciones",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/vacunaciones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "vacunaciones"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Registrar vacunación (vet/admin)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/vacunaciones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "vacunaciones"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mascota\": 1,\n  \"vacuna\": 1,\n  \"fecha_aplicacion\": \"2026-09-01\",\n  \"proxima_dosis\": \"2027-09-01\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Modificar vacunación",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/vacunaciones/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "vacunaciones",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"proxima_dosis\": \"2027-10-01\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar vacunación",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/vacunaciones/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "vacunaciones",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Servicios (CRUD admin)",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/servicios/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "servicios"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Crear",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/servicios/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "servicios"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Ecografía\",\n  \"descripcion\": \"Estudio por imágenes.\",\n  \"duracion_minutos\": 45\n}"
+            }
+          }
+        },
+        {
+          "name": "Detalle",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/servicios/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "servicios",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Modificar",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/servicios/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "servicios",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"activo\": false\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/servicios/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "servicios",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Turnos (CRUD)",
+      "item": [
+        {
+          "name": "Listar",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Solicitar (cliente)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"mascota\": 1,\n  \"servicio\": 1,\n  \"fecha\": \"2026-11-05T15:30:00Z\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Detalle",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos",
+                "1"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Confirmar (vet/admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"confirmado\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Cancelar (vet/admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"estado\": \"cancelado\"\n}"
+            }
+          }
+        },
+        {
+          "name": "Eliminar",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos",
+                "1"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Agenda",
+      "item": [
+        {
+          "name": "Próximas dosis y turnos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/agenda/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "agenda"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Inicio, filtros y búsqueda",
+      "item": [
+        {
+          "name": "Resumen del inicio (según rol)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/resumen/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "resumen"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Turnos pendientes (chip)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/?estado=pendiente",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos"
+              ],
+              "query": [
+                {
+                  "key": "estado",
+                  "value": "pendiente"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Turnos pendientes o confirmados",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/?estado=pendiente,confirmado",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos"
+              ],
+              "query": [
+                {
+                  "key": "estado",
+                  "value": "pendiente,confirmado"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Turnos futuros",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/?futuros=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos"
+              ],
+              "query": [
+                {
+                  "key": "futuros",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Turnos de una mascota",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/?mascota=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos"
+              ],
+              "query": [
+                {
+                  "key": "mascota",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Turnos por rango de fechas",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/turnos/?desde=2026-09-01&hasta=2026-12-31",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "turnos"
+              ],
+              "query": [
+                {
+                  "key": "desde",
+                  "value": "2026-09-01"
+                },
+                {
+                  "key": "hasta",
+                  "value": "2026-12-31"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Vacunaciones de una mascota",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/vacunaciones/?mascota=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "vacunaciones"
+              ],
+              "query": [
+                {
+                  "key": "mascota",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Vacunaciones con dosis pendiente",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/vacunaciones/?proximas=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "vacunaciones"
+              ],
+              "query": [
+                {
+                  "key": "proximas",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar mascota por nombre o dueño",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/?search=Ana",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "Ana"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Mascotas de un dueño",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/?dueno=3",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas"
+              ],
+              "query": [
+                {
+                  "key": "dueno",
+                  "value": "3"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Buscar usuario",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/?search=petshop.test",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "usuarios"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "petshop.test"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Usuarios por rol",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/?rol=veterinario",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "usuarios"
+              ],
+              "query": [
+                {
+                  "key": "rol",
+                  "value": "veterinario"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Servicios activos",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/servicios/?activo=true",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "servicios"
+              ],
+              "query": [
+                {
+                  "key": "activo",
+                  "value": "true"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Consultas sin leer",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/contacto/?leida=false",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "contacto"
+              ],
+              "query": [
+                {
+                  "key": "leida",
+                  "value": "false"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Ordenar mascotas",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/?ordering=-nombre",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas"
+              ],
+              "query": [
+                {
+                  "key": "ordering",
+                  "value": "-nombre"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Página con tamaño propio",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/?page_size=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas"
+              ],
+              "query": [
+                {
+                  "key": "page_size",
+                  "value": "1"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contacto",
+      "item": [
+        {
+          "name": "Enviar consulta (público)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/contacto/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "contacto"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Visitante\",\n  \"email\": \"visitante@mail.test\",\n  \"mensaje\": \"Quisiera consultar por los turnos disponibles.\"\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          }
+        },
+        {
+          "name": "Listar consultas (admin)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/contacto/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "contacto"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Marcar como leída (admin)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/contacto/1/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "contacto",
+                "1"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leida\": true\n}"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pruebas de seguridad",
+      "item": [
+        {
+          "name": "Sin token debe dar 401",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas"
+              ]
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('401 sin token', () => pm.response.to.have.status(401));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Cliente en /usuarios/ debe dar 403",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/usuarios/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "usuarios"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('403 por rol', () => pm.response.to.have.status(403));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Mascota ajena por id debe dar 404",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/mascotas/3/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "mascotas",
+                "3"
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('404 recurso ajeno', () => pm.response.to.have.status(404));"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "Contraseña débil debe dar 400",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/auth/registro/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "auth",
+                "registro"
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"debil@petshop.test\",\n  \"nombre\": \"Débil\",\n  \"password\": \"12345678\",\n  \"acepta_terminos\": true\n}"
+            },
+            "auth": {
+              "type": "noauth"
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('400 password', () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
