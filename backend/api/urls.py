@@ -1,18 +1,35 @@
-from django.urls import path
-from .views import (home, login, UsuarioViewSet, MascotaViewSet, MascotaDetailViewSet, TurnoViewSet,
-                    VacunacionViewSet, VacunaViewSet, CategoriaViewSet, ProductoViewSet, ProductoDetailViewSet,
-                    VacunacionesPorMascotaView, TurnosPorMascotaView)
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+from rest_framework_simplejwt.views import TokenRefreshView
+
+from .views import (
+    AgendaView, CategoriaViewSet, ConsultaViewSet, LoginView, LogoutView,
+    MascotaViewSet, PerfilView, ProductoViewSet, RegistroView, ResumenView,
+    ServicioViewSet, TurnoViewSet, UsuarioViewSet, VacunaViewSet, VacunacionViewSet,
+)
+
+router = DefaultRouter()
+router.register('usuarios', UsuarioViewSet, basename='usuario')
+router.register('mascotas', MascotaViewSet, basename='mascota')
+router.register('vacunas', VacunaViewSet, basename='vacuna')
+router.register('vacunaciones', VacunacionViewSet, basename='vacunacion')
+router.register('servicios', ServicioViewSet, basename='servicio')
+router.register('turnos', TurnoViewSet, basename='turno')
+router.register('contacto', ConsultaViewSet, basename='consulta')
+
+# Heredados del módulo Programador Web
+router.register('categorias', CategoriaViewSet, basename='categoria')
+router.register('productos', ProductoViewSet, basename='producto')
+
 urlpatterns = [
-    path('', home),
-    path('login/', login),
-    path('usuarios/', UsuarioViewSet.as_view()),
-    path('mascotas/', MascotaViewSet.as_view()),
-    path('mascota/<int:pk>/', MascotaDetailViewSet.as_view()),
-    path('mascotas/<int:pk>/vacunaciones/', VacunacionesPorMascotaView.as_view()),
-    path('mascotas/<int:pk>/turnos/', TurnosPorMascotaView.as_view()),
-    path('turnos/', TurnoViewSet.as_view()),
-    path('vacunas/', VacunaViewSet.as_view()),
-    path('categorias/', CategoriaViewSet.as_view()),
-    path('productos/', ProductoViewSet.as_view()),
-    path('productos/<int:pk>/', ProductoDetailViewSet.as_view()),
+    path('auth/registro/', RegistroView.as_view(), name='registro'),
+    path('auth/login/', LoginView.as_view(), name='login'),
+    path('auth/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
+    path('auth/logout/', LogoutView.as_view(), name='logout'),
+    path('auth/me/', PerfilView.as_view(), name='perfil'),
+
+    path('resumen/', ResumenView.as_view(), name='resumen'),
+    path('agenda/', AgendaView.as_view(), name='agenda'),
+
+    path('', include(router.urls)),
 ]
