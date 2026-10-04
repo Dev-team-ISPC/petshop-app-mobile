@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Textos del splash, en archivo aparte para no chocar con strings.xml -->
+<resources>
+    <string name="splash_subtitulo">Libreta sanitaria digital</string>
+    <string name="splash_despertando">Conectando con el servidor…\nLa primera conexión del día puede tardar hasta un minuto.</string>
+</resources>
