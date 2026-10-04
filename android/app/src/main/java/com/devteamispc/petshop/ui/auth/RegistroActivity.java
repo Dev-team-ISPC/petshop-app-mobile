@@ -34,7 +34,6 @@ public class RegistroActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (!exigirSesion()) return;
 
         vista = ActivityRegistroBinding.inflate(getLayoutInflater());
         setContentView(vista.getRoot());
