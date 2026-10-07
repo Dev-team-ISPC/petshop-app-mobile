@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Android 12 o superior muestra siempre un splash propio del sistema antes de
+  abrir la app. Sin esto se verían dos splash seguidos: el del sistema (blanco
+  con el ícono) y el nuestro. Con el mismo fondo y la misma huella, el paso de
+  uno al otro no se nota.
+-->
+<resources>
+    <style name="Theme.Petshop.Splash" parent="Theme.Petshop">
+        <item name="android:windowBackground">@color/azul</item>
+        <item name="android:statusBarColor">@color/azul</item>
+        <item name="android:navigationBarColor">@color/azul</item>
+        <item name="android:windowSplashScreenBackground">@color/azul</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_huella_splash</item>
+    </style>
+</resources>

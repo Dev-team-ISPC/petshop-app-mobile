@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  La misma huella con margen, para el splash del sistema en Android 12+.
+  El sistema recorta el ícono en un círculo de 2/3 del tamaño: el margen
+  hace que la huella entre completa.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="240dp"
+    android:viewportWidth="130"
+    android:viewportHeight="130">
+    <group
+        android:translateX="15"
+        android:translateY="15">
+        <path
+            android:fillColor="@color/blanco"
+            android:pathData="M18,42 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 M31.5,26 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 M50.5,26 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 M64,42 a9,9 0 1,0 18,0 a9,9 0 1,0 -18,0 M31,66 a19,16 0 1,0 38,0 a19,16 0 1,0 -38,0" />
+    </group>
+</vector>

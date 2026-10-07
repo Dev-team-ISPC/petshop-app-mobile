@@ -27,17 +27,25 @@
         android:theme="@style/Theme.Petshop"
         tools:targetApi="n">
 
-        <!-- ================= 1 · Acceso ================= -->
+        <!-- ================= 0 · Splash ================= -->
 
         <activity
-            android:name=".ui.auth.LoginActivity"
+            android:name=".ui.splash.SplashActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"
             android:exported="true"
-            android:theme="@style/Theme.Petshop">
+            android:theme="@style/Theme.Petshop.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- ================= 1 · Acceso ================= -->
+
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Petshop" />
 
         <activity
             android:name=".ui.auth.RegistroActivity"
