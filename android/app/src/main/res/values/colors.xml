@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Paleta tomada del mockup del equipo -->
+    <color name="azul">#2563EB</color>
+    <color name="azul_oscuro">#1D4ED8</color>
+    <color name="azul_claro">#E8F0FE</color>
+
+    <color name="blanco">#FFFFFF</color>
+    <color name="fondo_input">#F8FAFC</color>
+    <color name="fondo_suave">#F1F5F9</color>
+    <color name="borde">#CBD5E1</color>
+    <color name="borde_suave">#E2E8F0</color>
+
+    <color name="texto">#0F172A</color>
+    <color name="texto_medio">#475569</color>
+    <color name="texto_suave">#64748B</color>
+
+    <!-- Estados de turno y badges -->
+    <color name="pendiente_fondo">#FEF3C7</color>
+    <color name="pendiente_texto">#92400E</color>
+    <color name="confirmado_fondo">#DCFCE7</color>
+    <color name="confirmado_texto">#166534</color>
+    <color name="cancelado_fondo">#FEE2E2</color>
+    <color name="cancelado_texto">#B91C1C</color>
+    <color name="completado_fondo">#E2E8F0</color>
+    <color name="completado_texto">#475569</color>
+
+    <color name="peligro">#B91C1C</color>
+    <color name="peligro_borde">#FCA5A5</color>
+</resources>

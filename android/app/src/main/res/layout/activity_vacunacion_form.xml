@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Registrar vacunación — RF07
+
+  Esqueleto para que el proyecto compile y navegue desde el primer commit.
+  Reemplazá el contenido por la pantalla real.
+
+  Usá los estilos ya definidos para que las 14 pantallas se vean iguales:
+      style="@style/Etiqueta"        etiqueta sobre un campo
+      style="@style/Campo"           EditText o Spinner
+      style="@style/BotonPrimario"   botón azul principal
+      style="@style/BotonSecundario" botón con borde
+      @drawable/fondo_tarjeta        tarjeta de una lista
+
+  Accesibilidad (RNF13): todo ícono sin texto necesita contentDescription
+  y 48dp de área táctil.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:text="Registrar vacunación — RF07"
+            android:textColor="@color/texto_suave"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>

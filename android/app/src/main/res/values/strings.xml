@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Petshop</string>
+
+    <!-- Títulos de las pantallas -->
+    <string name="titulo_login">Iniciar sesión</string>
+    <string name="titulo_registro">Crear cuenta</string>
+    <string name="titulo_home">Petshop</string>
+    <string name="titulo_mascotas">Mis mascotas</string>
+    <string name="titulo_mascotas_vet">Mascotas</string>
+    <string name="titulo_mascota_nueva">Nueva mascota</string>
+    <string name="titulo_mascota_editar">Editar mascota</string>
+    <string name="titulo_carnet">Carnet</string>
+    <string name="titulo_turno_nuevo">Solicitar turno</string>
+    <string name="titulo_vacunacion_nueva">Registrar vacuna</string>
+    <string name="titulo_agenda">Agenda</string>
+    <string name="titulo_turnos">Turnos</string>
+    <string name="titulo_perfil">Mi perfil</string>
+    <string name="titulo_contacto">Contacto</string>
+    <string name="titulo_quienes_somos">Quiénes somos</string>
+    <string name="titulo_usuarios">Usuarios</string>
+    <string name="titulo_servicios">Servicios</string>
+
+    <!-- Campos -->
+    <string name="campo_email">Email</string>
+    <string name="campo_password">Contraseña</string>
+    <string name="campo_nombre">Nombre</string>
+    <string name="campo_telefono">Teléfono</string>
+    <string name="campo_direccion">Dirección</string>
+    <string name="campo_especie">Especie</string>
+    <string name="campo_raza">Raza</string>
+    <string name="campo_peso">Peso (kg)</string>
+    <string name="campo_fecha_nacimiento">Fecha de nacimiento</string>
+    <string name="campo_mascota">Mascota</string>
+    <string name="campo_servicio">Servicio</string>
+    <string name="campo_vacuna">Vacuna</string>
+    <string name="campo_fecha">Fecha</string>
+    <string name="campo_hora">Hora</string>
+    <string name="campo_fecha_aplicacion">Fecha de aplicación</string>
+    <string name="campo_proxima_dosis">Próxima dosis</string>
+    <string name="campo_observaciones">Observaciones (opcional)</string>
+    <string name="campo_mensaje">Tu mensaje</string>
+
+    <!-- Acciones -->
+    <string name="accion_ingresar">Ingresar</string>
+    <string name="accion_registrarme">Registrarme</string>
+    <string name="accion_guardar">Guardar</string>
+    <string name="accion_guardar_cambios">Guardar cambios</string>
+    <string name="accion_cancelar">Cancelar</string>
+    <string name="accion_confirmar">Confirmar</string>
+    <string name="accion_enviar">Enviar mensaje</string>
+    <string name="accion_solicitar_turno">Solicitar turno</string>
+    <string name="accion_cerrar_sesion">Cerrar sesión</string>
+    <string name="accion_eliminar_cuenta">Eliminar cuenta</string>
+    <string name="accion_reintentar">Reintentar</string>
+
+    <!-- Hints -->
+    <string name="hint_email">nombre@mail.com</string>
+    <string name="hint_nombre">Juan Pérez</string>
+    <string name="hint_password">Más de 8 caracteres</string>
+    <string name="hint_buscar_mascota">Buscar por mascota o dueño</string>
+    <string name="hint_buscar_usuario">Buscar por nombre o email</string>
+    <string name="hint_fecha">dd/mm/aaaa</string>
+    <string name="hint_peso">28,50</string>
+    <string name="hint_consulta">Escribí tu consulta…</string>
+
+    <!-- Política de contraseñas, la que valida el backend -->
+    <string name="password_reglas">Debe tener más de 8 caracteres, con mayúsculas, minúsculas, números y al menos un carácter especial.</string>
+    <string name="terminos">Acepto los Términos y Condiciones y la Política de Privacidad</string>
+
+    <!-- Estados vacíos -->
+    <string name="vacio_mascotas">Todavía no registraste ninguna mascota.</string>
+    <string name="vacio_vacunas">Sin vacunas registradas.</string>
+    <string name="vacio_turnos">Sin turnos registrados.</string>
+    <string name="vacio_agenda">No tenés nada próximo en la agenda.</string>
+    <string name="vacio_generico">No hay nada para mostrar.</string>
+
+    <!-- Mensajes -->
+    <string name="msg_sin_cuenta">¿No tenés cuenta? Registrate</string>
+    <string name="msg_turno_pendiente">El turno queda pendiente hasta que un veterinario lo confirme.</string>
+    <string name="msg_solo_veterinario">Esta pantalla sólo está disponible para veterinario y administrador.</string>
+    <string name="msg_dueno_automatico">El servidor asigna la mascota al usuario autenticado.</string>
+    <string name="msg_eliminar_cuenta">Se borran tus datos, tus mascotas y su historial. La acción no se puede deshacer.</string>
+
+    <!-- contentDescription: obligatorio en todo ícono sin texto (RNF13) -->
+    <string name="desc_volver">Volver</string>
+    <string name="desc_cerrar_sesion">Cerrar sesión</string>
+    <string name="desc_nueva_mascota">Nueva mascota</string>
+    <string name="desc_nuevo_turno">Solicitar turno</string>
+    <string name="desc_nueva_vacuna">Registrar vacunación</string>
+    <string name="desc_editar">Editar</string>
+    <string name="desc_avatar">Inicial de la mascota</string>
+</resources>

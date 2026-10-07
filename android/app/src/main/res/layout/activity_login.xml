@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="32dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="48dp"
+            android:text="@string/app_name"
+            android:textColor="@color/texto"
+            android:textSize="34sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="36dp"
+            android:text="@string/titulo_login"
+            android:textColor="@color/texto_medio"
+            android:textSize="17sp" />
+
+        <TextView
+            style="@style/Etiqueta"
+            android:labelFor="@id/campoEmail"
+            android:text="@string/campo_email" />
+
+        <EditText
+            android:id="@+id/campoEmail"
+            style="@style/Campo"
+            android:autofillHints="emailAddress"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            style="@style/Etiqueta"
+            android:labelFor="@id/campoPassword"
+            android:text="@string/campo_password" />
+
+        <EditText
+            android:id="@+id/campoPassword"
+            style="@style/Campo"
+            android:autofillHints="password"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/textoError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:textColor="@color/peligro"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:ignore="MissingDefaultResource" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonIngresar"
+            style="@style/BotonPrimario"
+            android:text="@string/accion_ingresar" />
+
+        <ProgressBar
+            android:id="@+id/progreso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/linkRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/msg_sin_cuenta"
+            android:textColor="@color/azul"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>

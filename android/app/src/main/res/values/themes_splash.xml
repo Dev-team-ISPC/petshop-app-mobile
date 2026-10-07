@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Tema del splash. Va en un archivo aparte de themes.xml para no generar
+  conflictos con los cambios de los demás.
+  El fondo azul en la ventana evita el destello blanco antes de que cargue el layout.
+-->
+<resources>
+    <style name="Theme.Petshop.Splash" parent="Theme.Petshop">
+        <item name="android:windowBackground">@color/azul</item>
+        <item name="android:statusBarColor">@color/azul</item>
+        <item name="android:navigationBarColor">@color/azul</item>
+    </style>
+</resources>
