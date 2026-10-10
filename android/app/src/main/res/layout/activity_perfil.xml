@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Perfil y baja de cuenta — RF16
-
-  Esqueleto para que el proyecto compile y navegue desde el primer commit.
-  Reemplazá el contenido por la pantalla real.
-
-  Usá los estilos ya definidos para que las 14 pantallas se vean iguales:
-      style="@style/Etiqueta"        etiqueta sobre un campo
-      style="@style/Campo"           EditText o Spinner
-      style="@style/BotonPrimario"   botón azul principal
-      style="@style/BotonSecundario" botón con borde
-      @drawable/fondo_tarjeta        tarjeta de una lista
-
-  Accesibilidad (RNF13): todo ícono sin texto necesita contentDescription
-  y 48dp de área táctil.
--->
+<!-- Mi perfil — RF02, RF16 (botón de arrepentimiento), US08 (cerrar sesión) -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blanco"
@@ -27,14 +13,99 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoEmail" android:text="@string/campo_email" />
+        <EditText
+            android:id="@+id/campoEmail"
+            style="@style/Campo"
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/fondo_campo"
+            android:backgroundTint="@color/fondo_suave"
+            android:enabled="false"
+            android:importantForAutofill="no"
+            android:inputType="none"
+            android:textColor="@color/texto_medio" />
         <TextView
-            android:id="@+id/placeholder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:text="Perfil y baja de cuenta — RF16"
+            android:layout_marginBottom="16dp"
+            android:text="@string/ayuda_email_fijo"
             android:textColor="@color/texto_suave"
-            android:textSize="16sp" />
+            android:textSize="13sp" />
 
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoNombre" android:text="@string/campo_nombre" />
+        <EditText
+            android:id="@+id/campoNombre"
+            style="@style/Campo"
+            android:autofillHints="name"
+            android:inputType="textPersonName|textCapWords" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoTelefono" android:text="@string/campo_telefono" />
+        <EditText
+            android:id="@+id/campoTelefono"
+            style="@style/Campo"
+            android:autofillHints="phone"
+            android:inputType="phone" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoDireccion" android:text="@string/campo_direccion" />
+        <EditText
+            android:id="@+id/campoDireccion"
+            style="@style/Campo"
+            android:autofillHints="postalAddress"
+            android:inputType="textPostalAddress" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonGuardar"
+            style="@style/BotonPrimario"
+            android:layout_marginTop="4dp"
+            android:text="@string/accion_guardar_cambios" />
+
+        <ProgressBar
+            android:id="@+id/progreso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonCerrarSesion"
+            style="@style/BotonSecundario"
+            android:layout_marginTop="12dp"
+            android:text="@string/accion_cerrar_sesion" />
+
+        <!-- Botón de arrepentimiento: separado, en rojo y con confirmación -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/fondo_zona_riesgo"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tituloZonaRiesgo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/titulo_eliminar_cuenta"
+                android:textColor="@color/peligro"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp"
+                android:text="@string/msg_eliminar_cuenta"
+                android:textColor="@color/texto_medio"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonEliminar"
+                style="@style/BotonSecundario"
+                android:text="@string/accion_eliminar_cuenta"
+                android:textColor="@color/peligro"
+                app:strokeColor="@color/peligro_borde" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
