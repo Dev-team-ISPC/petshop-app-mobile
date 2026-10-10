@@ -30,6 +30,9 @@ import com.devteamispc.petshop.ui.BaseActivity;
  */
 public class MascotaFormActivity extends BaseActivity {
 
+    /** Con este extra la pantalla edita la mascota en vez de crear una nueva. */
+    public static final String EXTRA_MASCOTA_ID = "mascota_id";
+
     private ActivityMascotaFormBinding vista;
 
     @Override

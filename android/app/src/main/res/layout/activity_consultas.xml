@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Consultas recibidas por Contacto
+
+  Esqueleto para que el proyecto compile y navegue desde el primer commit.
+  Reemplazá el contenido por la pantalla real.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/placeholder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:text="Consultas recibidas por Contacto"
+            android:textColor="@color/texto_suave"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</ScrollView>
