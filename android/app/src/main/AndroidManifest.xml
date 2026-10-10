@@ -148,5 +148,40 @@
             android:parentActivityName=".ui.home.HomeActivity"
             android:theme="@style/Theme.Petshop.ConBarra" />
 
+        <activity
+            android:name=".ui.admin.UsuarioFormActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.admin.UsuariosActivity"
+            android:theme="@style/Theme.Petshop.ConBarra"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.admin.ServicioFormActivity"
+            android:exported="false"
+            android:parentActivityName=".ui.admin.ServiciosActivity"
+            android:theme="@style/Theme.Petshop.ConBarra"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".ui.admin.ConsultasActivity"
+            android:exported="false"
+            android:label="@string/titulo_consultas"
+            android:parentActivityName=".ui.home.HomeActivity"
+            android:theme="@style/Theme.Petshop.ConBarra" />
+
+        <activity
+            android:name=".ui.vacunacion.VacunasActivity"
+            android:exported="false"
+            android:label="@string/titulo_vacunas"
+            android:parentActivityName=".ui.home.HomeActivity"
+            android:theme="@style/Theme.Petshop.ConBarra" />
+
+        <activity
+            android:name=".ui.vacunacion.VacunaFormActivity"
+            android:exported="false"
+            android:label="@string/titulo_vacuna_nueva"
+            android:parentActivityName=".ui.vacunacion.VacunasActivity"
+            android:theme="@style/Theme.Petshop.ConBarra"
+            android:windowSoftInputMode="adjustResize" />
     </application>
 </manifest>

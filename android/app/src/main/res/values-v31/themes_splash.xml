@@ -12,5 +12,6 @@
         <item name="android:navigationBarColor">@color/azul</item>
         <item name="android:windowSplashScreenBackground">@color/azul</item>
         <item name="android:windowSplashScreenAnimatedIcon">@drawable/ic_huella_splash</item>
+        <item name="android:windowSplashScreenIconBackgroundColor">@color/blanco</item>
     </style>
 </resources>

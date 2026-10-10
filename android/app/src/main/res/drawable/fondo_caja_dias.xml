@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Caja de días de una dosis. El color se aplica según el nivel (Badge.pintarDias). -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <solid android:color="@color/fondo_suave" />
+    <corners android:radius="10dp" />
+</shape>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Textos del Carnet y la Agenda, en archivo aparte para no chocar con strings.xml -->
+<resources>
+    <string name="pestana_vacunas">Vacunas</string>
+    <string name="pestana_turnos">Turnos</string>
+
+    <string name="carnet_aplicada">Aplicada: %1$s</string>
+    <string name="carnet_aplico">Aplicó: %1$s</string>
+    <string name="carnet_proxima">Próxima dosis: %1$s</string>
+    <string name="carnet_sin_proxima">Sin próxima dosis</string>
+    <string name="carnet_atiende">Atiende: %1$s</string>
+
+    <string name="agenda_titulo_dosis">Próximas dosis</string>
+    <string name="agenda_titulo_turnos">Próximos turnos</string>
+    <string name="agenda_vacio_dosis">Sin dosis próximas.</string>
+    <string name="agenda_vacio_turnos">Sin turnos próximos.</string>
+    <string name="agenda_cancelar_titulo">¿Cancelar el turno?</string>
+    <string name="agenda_cancelar_si">Cancelar turno</string>
+    <string name="agenda_cancelar_no">Volver</string>
+    <string name="agenda_confirmado">Turno confirmado</string>
+    <string name="agenda_cancelado">Turno cancelado</string>
+
+    <string name="titulo_agenda_general">Agenda general</string>
+    <string name="filtro_pendientes">Pendientes</string>
+    <string name="filtro_confirmados">Confirmados</string>
+    <string name="filtro_hoy">Hoy</string>
+    <string name="agenda_titulo_clinica">Turnos de toda la clínica</string>
+    <string name="agenda_detalle_admin">Dueño: %1$s · %2$s</string>
+    <string name="agenda_sin_veterinario">Sin veterinario asignado</string>
+    <string name="agenda_vacia_titulo">No tenés nada pendiente</string>
+    <string name="agenda_vacia_texto">Cuando tus mascotas tengan una próxima dosis o un turno futuro, van a aparecer acá ordenados por fecha.</string>
+    <string name="accion_pedir_un_turno">Pedir un turno</string>
+    <string name="agenda_sin_turnos_titulo">Sin turnos</string>
+    <string name="agenda_vacio_turnos_filtro">No hay turnos con este filtro.</string>
+    <string name="titulo_no_se_pudo_cargar">No se pudo cargar</string>
+    <string name="titulo_turno_de">Turno de %1$s</string>
+    <string name="estado_actual">Estado actual: %1$s</string>
+    <string name="accion_confirmar_y_tomar">Confirmar y tomar el turno</string>
+    <string name="accion_marcar_completado">Marcar como completado</string>
+    <string name="accion_cancelar_el_turno">Cancelar el turno</string>
+    <string name="accion_eliminar_turno">Eliminar el turno</string>
+    <string name="nota_confirmar_asigna">Al confirmar, el turno queda asignado a quien lo confirma. No hace falta elegirse de una lista.</string>
+    <string name="nota_admin_turnos">El administrador ve toda la agenda y puede eliminar un turno, pero no lo confirma ni lo completa: eso es del veterinario.</string>
+    <string name="agenda_completado">Turno completado</string>
+    <string name="titulo_eliminar_turno">¿Eliminar el turno?</string>
+    <string name="msg_eliminar_turno">Se borra del historial y no se puede deshacer. Si sólo hay que anularlo, conviene que el veterinario lo cancele.</string>
+    <string name="agenda_eliminado">Turno eliminado</string>
+
+    <string name="desc_confirmar_turno">Confirmar el turno de %1$s</string>
+    <string name="desc_cancelar_turno">Cancelar el turno de %1$s</string>
+</resources>

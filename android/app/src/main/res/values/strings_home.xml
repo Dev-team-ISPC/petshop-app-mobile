@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Textos del inicio, aparte de strings.xml -->
+<resources>
+    <string name="rol_cliente">Cliente</string>
+    <string name="rol_veterinario">Veterinario</string>
+    <string name="rol_admin">Administrador</string>
+
+    <string name="home_hola">Hola,</string>
+    <string name="home_administracion">Administración</string>
+    <string name="home_proxima_dosis_mayus">PRÓXIMA DOSIS</string>
+    <string name="home_turnos_por_confirmar">Turnos por confirmar</string>
+    <string name="home_sin_pendientes">No hay turnos pendientes de confirmar.</string>
+    <string name="accion_ver_todos">Ver todos</string>
+
+    <string name="home_pedir_turno">Pedir turno</string>
+    <string name="home_registrar_vacuna">Registrar vacuna</string>
+
+    <string name="home_detalle_pedir_turno">Consulta, baño, vacunación…</string>
+    <string name="home_detalle_registrar_vacuna">Elegí la mascota</string>
+    <string name="home_detalle_mascotas_vet">Todas</string>
+    <string name="home_detalle_mascotas_admin">Historia clínica, sólo lectura</string>
+    <string name="home_detalle_agenda_admin">Agenda general</string>
+    <string name="home_detalle_usuarios">Alta, edición y baja</string>
+    <string name="home_detalle_servicios">Catálogo de atención</string>
+    <string name="home_detalle_contacto">Consultas y horarios</string>
+    <string name="home_detalle_perfil">Datos y cuenta</string>
+
+    <plurals name="home_mascotas_registradas">
+        <item quantity="one">%d registrada</item>
+        <item quantity="other">%d registradas</item>
+    </plurals>
+    <plurals name="home_turnos_pendientes">
+        <item quantity="one">%d turno pendiente</item>
+        <item quantity="other">%d turnos pendientes</item>
+    </plurals>
+    <plurals name="home_turnos_hoy">
+        <item quantity="one">%d turno hoy</item>
+        <item quantity="other">%d turnos hoy</item>
+    </plurals>
+    <plurals name="home_servicios_activos">
+        <item quantity="one">%d activo · catálogo</item>
+        <item quantity="other">%d activos · catálogo</item>
+    </plurals>
+
+    <string name="ficha_usuarios">Usuarios</string>
+    <string name="ficha_mascotas">Mascotas</string>
+    <string name="ficha_turnos_corto">Turnos</string>
+
+    <!-- Caja de días de una dosis -->
+    <string name="dias_hoy">Hoy</string>
+    <string name="dias_uno">día</string>
+    <string name="dias_varios">días</string>
+    <string name="dias_vencida">vencida</string>
+
+    <string name="titulo_cerrar_sesion">¿Cerrar sesión?</string>
+    <string name="msg_cerrar_sesion">Vas a tener que volver a ingresar con tu email y contraseña.</string>
+    <string name="accion_quedarme">Quedarme</string>
+</resources>
