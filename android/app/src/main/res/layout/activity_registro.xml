@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Crear cuenta — RF01, RF15
-
-  Esqueleto para que el proyecto compile y navegue desde el primer commit.
-  Reemplazá el contenido por la pantalla real.
-
-  Usá los estilos ya definidos para que las 14 pantallas se vean iguales:
-      style="@style/Etiqueta"        etiqueta sobre un campo
-      style="@style/Campo"           EditText o Spinner
-      style="@style/BotonPrimario"   botón azul principal
-      style="@style/BotonSecundario" botón con borde
-      @drawable/fondo_tarjeta        tarjeta de una lista
-
-  Accesibilidad (RNF13): todo ícono sin texto necesita contentDescription
-  y 48dp de área táctil.
--->
+<!-- Crear cuenta — RF01, RF15. Pantalla pública. -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,14 +12,110 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <TextView
-            android:id="@+id/placeholder"
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoNombre" android:text="@string/campo_nombre" />
+        <EditText
+            android:id="@+id/campoNombre"
+            style="@style/Campo"
+            android:autofillHints="name"
+            android:hint="@string/hint_nombre"
+            android:inputType="textPersonName|textCapWords" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoEmail" android:text="@string/campo_email" />
+        <EditText
+            android:id="@+id/campoEmail"
+            style="@style/Campo"
+            android:autofillHints="emailAddress"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoPassword" android:text="@string/campo_password" />
+        <EditText
+            android:id="@+id/campoPassword"
+            style="@style/Campo"
+            android:autofillHints="newPassword"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword" />
+
+        <!-- Reglas de la contraseña: se marcan mientras se escribe -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:text="Crear cuenta — RF01, RF15"
-            android:textColor="@color/texto_suave"
-            android:textSize="16sp" />
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:orientation="vertical"
+            android:padding="14dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:text="@string/titulo_reglas_password"
+                android:textColor="@color/texto"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <TextView android:id="@+id/reglaLargo" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp" android:textSize="14sp" />
+            <TextView android:id="@+id/reglaMayusculas" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp" android:textSize="14sp" />
+            <TextView android:id="@+id/reglaNumero" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp" android:textSize="14sp" />
+            <TextView android:id="@+id/reglaEspecial" android:layout_width="match_parent" android:layout_height="wrap_content" android:paddingTop="2dp" android:paddingBottom="2dp" android:textSize="14sp" />
+        </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/campoTerminos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="@string/terminos"
+            android:textColor="@color/texto"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/linkTerminos"
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:text="@string/accion_leer_terminos"
+            android:textColor="@color/azul"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textoError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:accessibilityLiveRegion="polite"
+            android:textColor="@color/peligro"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonRegistrar"
+            style="@style/BotonPrimario"
+            android:layout_marginTop="8dp"
+            android:text="@string/accion_registrarme" />
+
+        <ProgressBar
+            android:id="@+id/progreso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center"
+            android:text="@string/msg_rol_cliente"
+            android:textColor="@color/texto_suave"
+            android:textSize="14sp" />
     </LinearLayout>
 </ScrollView>
