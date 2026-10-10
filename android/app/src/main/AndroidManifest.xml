@@ -60,7 +60,7 @@
             android:name=".ui.home.HomeActivity"
             android:exported="false"
             android:label="@string/titulo_home"
-            android:theme="@style/Theme.Petshop.ConBarra" />
+            android:theme="@style/Theme.Petshop" />
 
         <!-- ================= 3 · Mascotas y carnet ================= -->
 
