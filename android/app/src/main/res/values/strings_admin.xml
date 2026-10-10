@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Textos de la administración (usuarios y servicios), aparte de strings.xml -->
+<resources>
+    <string name="msg_solo_admin">Esta pantalla sólo está disponible para el administrador.</string>
+
+    <string name="titulo_usuario_nuevo">Nuevo usuario</string>
+    <string name="titulo_usuario_editar">Editar usuario</string>
+    <string name="titulo_servicio_nuevo">Nuevo servicio</string>
+    <string name="titulo_servicio_editar">Editar servicio</string>
+
+    <string name="filtro_todos">Todos</string>
+    <string name="filtro_clientes">Clientes</string>
+    <string name="filtro_veterinarios">Veterinarios</string>
+    <string name="filtro_admins">Administradores</string>
+    <string name="filtro_activos">Activos</string>
+    <string name="filtro_inactivos">Inactivos</string>
+
+    <string name="vacio_usuarios">No hay usuarios que coincidan.</string>
+    <string name="vacio_servicios">No hay servicios para mostrar.</string>
+
+    <string name="campo_rol">Rol</string>
+    <string name="campo_descripcion">Descripción (opcional)</string>
+    <string name="campo_duracion">Duración (minutos)</string>
+    <string name="campo_usuario_activo">Usuario activo</string>
+    <string name="campo_servicio_activo">Se ofrece al pedir turno</string>
+    <string name="hint_servicio">Consulta general</string>
+
+    <string name="ayuda_password_edicion">Dejala vacía para no cambiarla. Si la cambiás, debe tener más de 8 caracteres, con mayúsculas, minúsculas, números y un carácter especial.</string>
+    <string name="ayuda_activo_usuario">Un usuario inactivo no puede iniciar sesión, pero conserva sus mascotas y su historial.</string>
+    <string name="ayuda_activo_servicio">Un servicio inactivo deja de ofrecerse, pero los turnos ya registrados lo conservan.</string>
+
+    <string name="error_obligatorio">Este campo es obligatorio.</string>
+    <string name="error_email">Ingresá un email válido.</string>
+    <string name="error_duracion">Ingresá entre %1$d y %2$d minutos.</string>
+
+    <string name="servicio_duracion">%1$d min</string>
+    <string name="estado_activo">Activo</string>
+    <string name="estado_inactivo">Inactivo</string>
+
+    <string name="msg_usuario_creado">Usuario creado</string>
+    <string name="msg_servicio_creado">Servicio creado</string>
+    <string name="msg_cambios_guardados">Cambios guardados</string>
+    <string name="msg_usuario_eliminado">Usuario eliminado</string>
+    <string name="msg_servicio_eliminado">Servicio eliminado</string>
+
+    <string name="titulo_zona_peligro">Zona de riesgo</string>
+    <string name="accion_eliminar">Eliminar</string>
+    <string name="accion_eliminar_usuario">Eliminar usuario</string>
+    <string name="accion_eliminar_servicio">Eliminar servicio</string>
+    <string name="accion_desactivar">Desactivar</string>
+    <string name="accion_volver">Volver</string>
+
+    <string name="titulo_eliminar_usuario">¿Eliminar el usuario?</string>
+    <string name="msg_eliminar_usuario">Se eliminan también sus mascotas, vacunas y turnos. No se puede deshacer. Si sólo querés impedir que entre, desactivalo.</string>
+    <string name="titulo_eliminar_servicio">¿Eliminar el servicio?</string>
+    <string name="msg_eliminar_servicio">Si tiene turnos registrados no se va a poder eliminar.</string>
+    <string name="titulo_no_se_puede_eliminar">No se puede eliminar</string>
+    <string name="msg_servicio_con_turnos">El servicio tiene turnos registrados. ¿Querés desactivarlo para que no se ofrezca más?</string>
+
+    <string name="desc_nuevo_usuario">Nuevo usuario</string>
+    <string name="desc_nuevo_servicio">Nuevo servicio</string>
+</resources>

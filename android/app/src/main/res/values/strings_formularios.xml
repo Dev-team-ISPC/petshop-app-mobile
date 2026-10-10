@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Textos de los formularios de mascota, turno y vacunación, y del carnet -->
+<resources>
+    <!-- Mascota -->
+    <string name="hint_nombre_mascota">Rocco</string>
+    <string name="hint_raza">Labrador</string>
+    <string name="ayuda_peso">Admite decimales. Ej.: 3,5</string>
+    <string name="ayuda_fecha_nacimiento">No puede ser una fecha futura.</string>
+    <string name="error_peso">Ingresá un peso mayor a 0 y hasta 999,99 kg, con hasta dos decimales.</string>
+    <string name="error_fecha_nacimiento">Elegí la fecha de nacimiento.</string>
+    <string name="msg_mascota_creada">Mascota registrada</string>
+    <string name="accion_eliminar_mascota">Eliminar mascota</string>
+    <string name="titulo_eliminar_mascota">¿Eliminar a %1$s?</string>
+    <string name="msg_eliminar_mascota">Se borran también su carnet: vacunas y turnos. No se puede deshacer.</string>
+    <string name="msg_eliminar_mascota_detalle">Si la mascota ya no está con vos, podés eliminarla junto con su carnet.</string>
+    <string name="msg_mascota_eliminada">Mascota eliminada</string>
+    <string name="msg_alta_solo_cliente">El alta de mascotas la hace su dueño desde su cuenta.</string>
+
+    <!-- Turno -->
+    <string name="hint_hora">hh:mm</string>
+    <string name="hint_observaciones">Motivo de la consulta…</string>
+    <string name="duracion_estimada">Duración estimada: %1$d minutos</string>
+    <string name="error_fecha_turno">Elegí la fecha del turno.</string>
+    <string name="error_hora_turno">Elegí la hora.</string>
+    <string name="error_turno_pasado">El turno tiene que ser en el futuro.</string>
+    <string name="msg_sin_servicios">No hay servicios disponibles para pedir turno.</string>
+    <string name="msg_sin_mascotas_turno">Primero registrá una mascota para poder pedirle un turno.</string>
+    <string name="msg_turno_solicitado">Turno solicitado. Queda pendiente hasta que un veterinario lo confirme.</string>
+
+    <!-- Vacunación -->
+    <string name="campo_veterinario">Veterinario</string>
+    <string name="frecuencia_sugerida">Frecuencia sugerida: %1$s</string>
+    <string name="ayuda_proxima_dosis">Se sugiere según la frecuencia de la vacuna. Es lo que después aparece en la agenda del dueño.</string>
+    <string name="nota_solo_veterinario">Esta pantalla sólo está disponible para el veterinario. El administrador consulta la historia clínica pero no la modifica.</string>
+    <string name="msg_solo_veterinario_vacunas">Sólo el veterinario registra vacunaciones.</string>
+    <string name="msg_sin_vacunas">No hay vacunas cargadas en el catálogo.</string>
+    <string name="error_proxima_dosis">La próxima dosis tiene que ser posterior a la fecha de aplicación.</string>
+    <string name="msg_vacunacion_guardada">Vacunación registrada</string>
+    <string name="accion_guardar_vacunacion">Guardar vacunación</string>
+
+    <!-- Carnet -->
+    <string name="carnet_dueno">Dueño: %1$s</string>
+    <string name="accion_editar_mascota">Editar mascota</string>
+    <string name="accion_cancelar_turno">Cancelar turno</string>
+    <string name="desc_cancelar_turno_servicio">Cancelar el turno de %1$s del %2$s</string>
+    <string name="titulo_cancelar_turno">¿Cancelar este turno?</string>
+    <string name="msg_cancelar_turno_cliente">El turno queda registrado como cancelado y la clínica lo ve en su agenda. No se borra: el historial se conserva.</string>
+    <string name="accion_si_cancelar">Sí, cancelar</string>
+    <string name="accion_no_volver">No, volver</string>
+</resources>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Colores agregados en la revisión de accesibilidad.
+  borde_campo: 3,65:1 contra blanco (WCAG 1.4.11 pide 3:1 para el borde que
+  identifica un campo). El borde anterior (@color/borde) daba 1,48:1.
+-->
+<resources>
+    <color name="borde_campo">#7B8798</color>
+    <color name="rol_admin_fondo">#EDE9FE</color>
+    <color name="rol_admin_texto">#5B21B6</color>
+</resources>
