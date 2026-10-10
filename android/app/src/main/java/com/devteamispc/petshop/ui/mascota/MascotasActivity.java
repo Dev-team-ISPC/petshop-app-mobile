@@ -59,8 +59,10 @@ public class MascotasActivity extends BaseActivity {
         configurarLista();
         configurarBuscador();
 
-        // Sólo el cliente y el veterinario dan de alta mascotas.
-        boolean puedeCrear = sesion.esCliente() || sesion.esVeterinario();
+        // Sólo el cliente da de alta mascotas: el servidor se las asigna. El
+        // veterinario tendría que elegir el dueño, y no tiene acceso a la lista
+        // de usuarios (es exclusiva del administrador).
+        boolean puedeCrear = sesion.esCliente();
         vista.botonNueva.setVisibility(puedeCrear ? View.VISIBLE : View.GONE);
         vista.botonNueva.setOnClickListener(v ->
                 startActivity(new Intent(this, MascotaFormActivity.class)));
