@@ -10,9 +10,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
- * Único punto de entrada a la API. La URL sale de BuildConfig:
- * en debug apunta a 10.0.2.2:8000 (la máquina anfitriona vista desde el
- * emulador) y en release al dominio real.
+ * Único punto de entrada a la API. La URL sale de BuildConfig.API_URL:
+ * por defecto el backend desplegado en Render; cada integrante puede apuntar
+ * a su backend local con API_URL en local.properties, sin tocar el código.
  *
  * Uso desde cualquier pantalla:
  *     ApiClient.getApi().mascotas(filtros).enqueue(...)
@@ -51,6 +51,8 @@ public final class ApiClient {
         log.setLevel(BuildConfig.DEBUG
                 ? HttpLoggingInterceptor.Level.BODY
                 : HttpLoggingInterceptor.Level.NONE);
+        // Aun en debug, el token no se escribe en el Logcat.
+        log.redactHeader("Authorization");
 
         return new OkHttpClient.Builder()
                 .addInterceptor(log)
