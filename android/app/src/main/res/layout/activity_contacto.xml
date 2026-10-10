@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Contacto — RF10
-
-  Esqueleto para que el proyecto compile y navegue desde el primer commit.
-  Reemplazá el contenido por la pantalla real.
-
-  Usá los estilos ya definidos para que las 14 pantallas se vean iguales:
-      style="@style/Etiqueta"        etiqueta sobre un campo
-      style="@style/Campo"           EditText o Spinner
-      style="@style/BotonPrimario"   botón azul principal
-      style="@style/BotonSecundario" botón con borde
-      @drawable/fondo_tarjeta        tarjeta de una lista
-
-  Accesibilidad (RNF13): todo ícono sin texto necesita contentDescription
-  y 48dp de área táctil.
--->
+<!-- Contacto — RF06. Pantalla pública: el envío no requiere sesión. -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blanco"
@@ -27,14 +13,193 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <TextView
-            android:id="@+id/placeholder"
+        <LinearLayout
+            android:id="@+id/tarjetaQuienesSomos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:text="Contacto — RF10"
-            android:textColor="@color/texto_suave"
-            android:textSize="16sp" />
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:minHeight="64dp"
+            android:orientation="horizontal"
+            android:padding="14dp">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/titulo_quienes_somos"
+                    android:textColor="@color/texto"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/subtitulo_quienes_somos"
+                    android:textColor="@color/texto_suave"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:text="›"
+                android:textColor="@color/texto_medio"
+                android:textSize="26sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/filaDireccion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@android:drawable/ic_dialog_map"
+                app:tint="@color/azul" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/institucional_direccion"
+                android:textColor="@color/texto"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/filaTelefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@android:drawable/ic_menu_call"
+                app:tint="@color/azul" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/institucional_telefono"
+                android:textColor="@color/texto"
+                android:textSize="15sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/filaEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:minHeight="48dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@android:drawable/ic_dialog_email"
+                app:tint="@color/azul" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="@string/institucional_email"
+                android:textColor="@color/texto"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <TextView style="@style/Etiqueta" android:layout_marginTop="16dp" android:labelFor="@id/campoNombre" android:text="@string/campo_nombre" />
+        <EditText
+            android:id="@+id/campoNombre"
+            style="@style/Campo"
+            android:autofillHints="name"
+            android:hint="@string/hint_nombre"
+            android:inputType="textPersonName|textCapWords" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoEmail" android:text="@string/campo_email" />
+        <EditText
+            android:id="@+id/campoEmail"
+            style="@style/Campo"
+            android:autofillHints="emailAddress"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoMensaje" android:text="@string/campo_mensaje" />
+        <EditText
+            android:id="@+id/campoMensaje"
+            style="@style/Campo"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:gravity="top|start"
+            android:hint="@string/hint_consulta"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine|textCapSentences"
+            android:maxLength="500"
+            android:minHeight="120dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/ayuda_minimo_mensaje"
+                android:textColor="@color/texto_suave"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/contador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/texto_suave"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonEnviar"
+            style="@style/BotonPrimario"
+            android:text="@string/accion_enviar" />
+
+        <ProgressBar
+            android:id="@+id/progreso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>
