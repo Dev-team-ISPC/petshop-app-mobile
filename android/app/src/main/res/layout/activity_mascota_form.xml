@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Alta y edición de mascota — RF03 -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blanco"
@@ -86,6 +87,33 @@
             android:id="@+id/botonGuardar"
             style="@style/BotonPrimario"
             android:text="@string/accion_guardar" />
+
+        <!-- Sólo el dueño, en la edición -->
+        <LinearLayout
+            android:id="@+id/zonaEliminar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/fondo_zona_riesgo"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/msg_eliminar_mascota_detalle"
+                android:textColor="@color/texto_medio"
+                android:textSize="14sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonEliminar"
+                style="@style/BotonSecundario"
+                android:layout_marginTop="12dp"
+                android:text="@string/accion_eliminar_mascota"
+                android:textColor="@color/peligro"
+                app:strokeColor="@color/peligro_borde" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progreso"
