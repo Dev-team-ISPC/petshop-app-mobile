@@ -1,10 +1,12 @@
 package com.devteamispc.petshop.ui.mascota;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 
 import com.devteamispc.petshop.R;
 import com.devteamispc.petshop.data.api.ApiClient;
@@ -27,7 +29,7 @@ import retrofit2.Response;
 /**
  * 5 · MascotaFormActivity — RF03
  *
- * Endpoints: POST /mascotas/ · GET y PATCH /mascotas/{id}/
+ * Endpoints: POST /mascotas/ · GET, PATCH y DELETE /mascotas/{id}/
  *
  * Sin EXTRA_MASCOTA_ID es un alta (sólo el cliente: el servidor le asigna la
  * mascota); con él, una edición (dueño o veterinario, desde el carnet).
@@ -35,6 +37,8 @@ import retrofit2.Response;
  *   - Especie: catálogo cerrado. Se muestra "Perro" pero se envía "perro".
  *   - Peso: admite coma o punto y viaja como texto ("28.50"), como lo serializa DRF.
  *   - Fecha de nacimiento: con el selector de fecha, sin fechas futuras.
+ *   - Eliminar: sólo el dueño, en la edición, con confirmación. El backend
+ *     borra también su carnet (vacunaciones y turnos).
  */
 public class MascotaFormActivity extends BaseActivity {
 
@@ -68,6 +72,9 @@ public class MascotaFormActivity extends BaseActivity {
             return;
         }
         vista.ayudaDueno.setVisibility(esAlta ? View.VISIBLE : View.GONE);
+        // Eliminar es del dueño: el veterinario edita, pero no borra.
+        vista.zonaEliminar.setVisibility(!esAlta && sesion.esCliente() ? View.VISIBLE : View.GONE);
+        vista.botonEliminar.setOnClickListener(v -> confirmarEliminar());
 
         ArrayAdapter<String> especies = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, ESPECIES_TEXTO);
         especies.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -193,8 +200,48 @@ public class MascotaFormActivity extends BaseActivity {
         });
     }
 
+    // ------------------------------------------------------------- eliminar
+
+    private void confirmarEliminar() {
+        String nombre = vista.campoNombre.getText().toString().trim();
+        new AlertDialog.Builder(this)
+                .setTitle(getString(R.string.titulo_eliminar_mascota, nombre))
+                .setMessage(R.string.msg_eliminar_mascota)
+                .setPositiveButton(R.string.accion_eliminar, (d, b) -> eliminar())
+                .setNegativeButton(R.string.accion_volver, null)
+                .show();
+    }
+
+    private void eliminar() {
+        cargando(true);
+        ApiClient.getApi().eliminarMascota(mascotaId).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> respuesta) {
+                cargando(false);
+                if (manejarErrorComun(respuesta)) return;
+                if (respuesta.isSuccessful()) {
+                    aviso(getString(R.string.msg_mascota_eliminada));
+                    // Vuelve a la lista: el carnet de esta mascota ya no existe.
+                    Intent i = new Intent(MascotaFormActivity.this, MascotasActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    startActivity(i);
+                    finish();
+                } else {
+                    aviso(ApiError.mensaje(respuesta));
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
+                cargando(false);
+                aviso(ApiError.sinConexion());
+            }
+        });
+    }
+
     private void cargando(boolean si) {
         vista.progreso.setVisibility(si ? View.VISIBLE : View.GONE);
         vista.botonGuardar.setEnabled(!si);
+        vista.botonEliminar.setEnabled(!si);
     }
 }
