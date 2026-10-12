@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Alta y edición de servicio — CRUD de servicios
-
-  Esqueleto para que el proyecto compile y navegue desde el primer commit.
-  Reemplazá el contenido por la pantalla real.
--->
+<!-- Alta y edición de servicio (CRUD 2) -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/blanco"
@@ -17,14 +13,83 @@
         android:orientation="vertical"
         android:padding="20dp">
 
-        <TextView
-            android:id="@+id/placeholder"
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoNombre" android:text="@string/campo_nombre" />
+        <EditText
+            android:id="@+id/campoNombre"
+            style="@style/Campo"
+            android:hint="@string/hint_servicio"
+            android:importantForAutofill="no"
+            android:inputType="textCapSentences" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoDescripcion" android:text="@string/campo_descripcion" />
+        <EditText
+            android:id="@+id/campoDescripcion"
+            style="@style/Campo"
+            android:layout_height="wrap_content"
+            android:gravity="top|start"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minHeight="96dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoDuracion" android:text="@string/campo_duracion" />
+        <EditText
+            android:id="@+id/campoDuracion"
+            style="@style/Campo"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:maxLength="3" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/campoActivo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:text="Alta y edición de servicio — CRUD de servicios"
-            android:textColor="@color/texto_suave"
+            android:minHeight="48dp"
+            android:text="@string/campo_servicio_activo"
+            android:textColor="@color/texto"
             android:textSize="16sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/ayuda_activo_servicio"
+            android:textColor="@color/texto_suave"
+            android:textSize="13sp" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonGuardar"
+            style="@style/BotonPrimario"
+            android:text="@string/accion_guardar" />
+
+        <ProgressBar
+            android:id="@+id/progreso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/bloqueEliminar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/Etiqueta"
+                android:text="@string/titulo_zona_peligro"
+                android:textColor="@color/peligro"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonEliminar"
+                style="@style/BotonSecundario"
+                android:text="@string/accion_eliminar_servicio"
+                android:textColor="@color/peligro"
+                app:strokeColor="@color/peligro_borde" />
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>
