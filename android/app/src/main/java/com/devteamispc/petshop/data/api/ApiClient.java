@@ -1,9 +1,13 @@
 package com.devteamispc.petshop.data.api;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.devteamispc.petshop.BuildConfig;
 
 import java.util.concurrent.TimeUnit;
 
+import com.devteamispc.petshop.data.model.RefreshRequest;
+import com.devteamispc.petshop.data.model.RefreshResponse;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -20,30 +24,44 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public final class ApiClient {
 
     private static PetshopApi api;
-    private static PetshopApi apiSinAuth;
 
     private ApiClient() { }
 
     public static synchronized PetshopApi getApi() {
         if (api == null) {
-            OkHttpClient cliente = baseBuilder()
-                    .addInterceptor(new AuthInterceptor())
-                    .authenticator(new TokenAuthenticator())
-                    .build();
-            api = construir(cliente);
+            api = construirCon(BuildConfig.API_URL, new TokensDeSesion());
         }
         return api;
     }
 
     /**
-     * Cliente sin interceptor ni authenticator: lo usa TokenAuthenticator
-     * para pedir el refresh sin entrar en recursión.
+     * Sólo para los tests instrumentados (Espresso): apunta la app a un servidor
+     * simulado en el propio teléfono, para no depender de internet ni de Render.
      */
-    static synchronized PetshopApi getApiSinAuth() {
-        if (apiSinAuth == null) {
-            apiSinAuth = construir(baseBuilder().build());
-        }
-        return apiSinAuth;
+    @VisibleForTesting
+    public static synchronized void usarServidorDePrueba(String baseUrl) {
+        api = construirCon(baseUrl, new TokensDeSesion());
+    }
+
+    /**
+     * Arma el cliente completo contra cualquier servidor y almacén de tokens.
+     * La app lo usa con Render y SessionManager; los tests de red, con
+     * MockWebServer y un almacén en memoria.
+     *
+     * El refresh se pide con un cliente sin interceptor ni authenticator, para
+     * no entrar en recursión.
+     */
+    static PetshopApi construirCon(String baseUrl, AlmacenTokens tokens) {
+        PetshopApi sinAuth = construir(baseUrl, baseBuilder().build());
+        TokenAuthenticator.Renovador renovador = refresh -> {
+            retrofit2.Response<RefreshResponse> r = sinAuth.refresh(new RefreshRequest(refresh)).execute();
+            return r.isSuccessful() ? r.body() : null;
+        };
+        OkHttpClient cliente = baseBuilder()
+                .addInterceptor(new AuthInterceptor(tokens))
+                .authenticator(new TokenAuthenticator(tokens, renovador))
+                .build();
+        return construir(baseUrl, cliente);
     }
 
     private static OkHttpClient.Builder baseBuilder() {
@@ -60,9 +78,9 @@ public final class ApiClient {
                 .readTimeout(20, TimeUnit.SECONDS);
     }
 
-    private static PetshopApi construir(OkHttpClient cliente) {
+    private static PetshopApi construir(String baseUrl, OkHttpClient cliente) {
         return new Retrofit.Builder()
-                .baseUrl(BuildConfig.API_URL)
+                .baseUrl(baseUrl)
                 .client(cliente)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

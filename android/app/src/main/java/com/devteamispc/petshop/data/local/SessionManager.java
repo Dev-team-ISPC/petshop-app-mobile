@@ -1,5 +1,7 @@
 package com.devteamispc.petshop.data.local;
 
+import com.devteamispc.petshop.data.api.AlmacenTokens;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -10,7 +12,7 @@ import com.google.gson.Gson;
  * Guarda la sesión en SharedPreferences: los dos tokens y el usuario.
  * Es un singleton porque el interceptor de red también necesita el token.
  */
-public class SessionManager {
+public class SessionManager implements AlmacenTokens {
 
     private static final String PREFS = "petshop_session";
     private static final String KEY_ACCESS = "access";
