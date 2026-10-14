@@ -1,3 +1,5 @@
+from types import SimpleNamespace
+
 from django.db.models import Count, Q
 from django.utils import timezone
 from rest_framework import status, viewsets
@@ -6,10 +8,13 @@ from rest_framework.generics import CreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.throttling import ScopedRateThrottle
+from rest_framework.exceptions import AuthenticationFailed
 from rest_framework.views import APIView
-from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework_simplejwt.exceptions import InvalidToken, TokenError
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
+from . import seguridad
 
 from .models import (
     Categoria, Consulta, Mascota, Producto, Servicio, Turno, Usuario, Vacuna, Vacunacion,
@@ -36,12 +41,60 @@ class RegistroView(CreateAPIView):
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'registro'
 
+    def perform_create(self, serializer):
+        usuario = serializer.save()
+        seguridad.registrar(
+            'cuenta_creada', self.request, usuario=usuario,
+            recurso=f'usuario:{usuario.id}',
+        )
+
 
 class LoginView(TokenObtainPairView):
     serializer_class = LoginSerializer
     permission_classes = [AllowAny]
     throttle_classes = [ScopedRateThrottle]
     throttle_scope = 'login'
+
+    def post(self, request, *args, **kwargs):
+        email = request.data.get('email') if hasattr(request.data, 'get') else None
+        try:
+            respuesta = super().post(request, *args, **kwargs)
+        except (AuthenticationFailed, InvalidToken):
+            # Mismo registro para email inexistente, contraseña incorrecta o
+            # cuenta inactiva: la respuesta al cliente tampoco los distingue.
+            seguridad.registrar(
+                'login_fallido', request, resultado='rechazado', nivel=seguridad.WARNING,
+                cuenta=seguridad.seudonimo_email(email),
+                email_enmascarado=seguridad.enmascarar_email(email),
+            )
+            raise
+
+        # En el login request.user todavía es anónimo: el usuario sale de la respuesta.
+        datos = respuesta.data.get('usuario', {})
+        seguridad.registrar(
+            'login_exitoso', request,
+            usuario=SimpleNamespace(id=datos.get('id'), rol=datos.get('rol')),
+            recurso=f"usuario:{datos.get('id')}",
+            cuenta=seguridad.seudonimo_email(email),
+        )
+        return respuesta
+
+
+class RefreshView(TokenRefreshView):
+    """
+    Renovación del access token. Sólo se registra el rechazo: reusar un refresh
+    ya rotado (o revocado al cerrar sesión) puede indicar un token robado.
+    """
+
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except (InvalidToken, AuthenticationFailed):
+            seguridad.registrar(
+                'refresh_rechazado', request, resultado='rechazado',
+                nivel=seguridad.WARNING, motivo='refresh vencido, rotado o revocado',
+            )
+            raise
 
 
 class LogoutView(APIView):
@@ -63,6 +116,7 @@ class LogoutView(APIView):
                 {'detail': 'El token ya es inválido o expiró.'},
                 status=status.HTTP_400_BAD_REQUEST,
             )
+        seguridad.registrar('logout', request, recurso=f'usuario:{request.user.id}')
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
@@ -80,6 +134,11 @@ class PerfilView(RetrieveUpdateDestroyAPIView):
         return self.request.user
 
     def perform_destroy(self, instance):
+        # Botón de arrepentimiento (RNF17): queda constancia de la baja.
+        seguridad.registrar(
+            'cuenta_eliminada', self.request, recurso=f'usuario:{instance.id}',
+            nivel=seguridad.WARNING,
+        )
         instance.delete()
 
 
@@ -106,6 +165,46 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         if self.action in ('create', 'update', 'partial_update'):
             return UsuarioEscrituraSerializer
         return UsuarioSerializer
+
+    # -- Registros de las acciones administrativas sobre usuarios ----------
+
+    def perform_create(self, serializer):
+        usuario = serializer.save()
+        seguridad.registrar(
+            'usuario_creado', self.request, recurso=f'usuario:{usuario.id}',
+            rol_asignado=usuario.rol,
+        )
+
+    def perform_update(self, serializer):
+        antes = serializer.instance
+        rol_anterior, activo_anterior = antes.rol, antes.is_active
+        # Sólo los NOMBRES de los campos tocados: nunca sus valores.
+        campos = sorted(serializer.validated_data.keys())
+        usuario = serializer.save()
+        recurso = f'usuario:{usuario.id}'
+
+        seguridad.registrar('usuario_modificado', self.request, recurso=recurso, campos=campos)
+        if usuario.rol != rol_anterior:
+            seguridad.registrar(
+                'rol_cambiado', self.request, recurso=recurso, nivel=seguridad.WARNING,
+                rol_anterior=rol_anterior, rol_nuevo=usuario.rol,
+            )
+        if usuario.is_active != activo_anterior:
+            seguridad.registrar(
+                'usuario_activado' if usuario.is_active else 'usuario_desactivado',
+                self.request, recurso=recurso, nivel=seguridad.WARNING,
+            )
+        if 'password' in campos:
+            seguridad.registrar(
+                'password_restablecida', self.request, recurso=recurso, nivel=seguridad.WARNING,
+            )
+
+    def perform_destroy(self, instance):
+        seguridad.registrar(
+            'usuario_eliminado', self.request, recurso=f'usuario:{instance.id}',
+            nivel=seguridad.WARNING, rol_eliminado=instance.rol,
+        )
+        instance.delete()
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def veterinarios(self, request):
@@ -170,12 +269,40 @@ class MascotaViewSet(viewsets.ModelViewSet):
 # Vacunas y vacunaciones
 # ---------------------------------------------------------------------------
 
-class VacunaViewSet(viewsets.ModelViewSet):
+class RegistroDeCambiosMixin:
+    """
+    Deja constancia de las altas, modificaciones y bajas de un catálogo.
+    Si la baja falla porque el registro está en uso, el manejador de
+    excepciones devuelve 409 y registra el rechazo.
+    """
+
+    recurso_log = 'recurso'
+
+    def perform_create(self, serializer):
+        obj = serializer.save()
+        seguridad.registrar(f'{self.recurso_log}_creado', self.request,
+                            recurso=f'{self.recurso_log}:{obj.id}')
+
+    def perform_update(self, serializer):
+        obj = serializer.save()
+        seguridad.registrar(f'{self.recurso_log}_modificado', self.request,
+                            recurso=f'{self.recurso_log}:{obj.id}',
+                            campos=sorted(serializer.validated_data.keys()))
+
+    def perform_destroy(self, instance):
+        recurso = f'{self.recurso_log}:{instance.id}'
+        instance.delete()
+        seguridad.registrar(f'{self.recurso_log}_eliminado', self.request,
+                            recurso=recurso, nivel=seguridad.WARNING)
+
+
+class VacunaViewSet(RegistroDeCambiosMixin, viewsets.ModelViewSet):
     queryset = Vacuna.objects.all()
     serializer_class = VacunaSerializer
     permission_classes = [IsAuthenticated, LecturaAutenticadaEscrituraClinica]
     search_fields = ['nombre']
     ordering_fields = ['nombre']
+    recurso_log = 'vacuna'
 
 
 class VacunacionViewSet(viewsets.ModelViewSet):
@@ -209,11 +336,12 @@ class VacunacionViewSet(viewsets.ModelViewSet):
 # Servicios y turnos  (CRUD 2)
 # ---------------------------------------------------------------------------
 
-class ServicioViewSet(viewsets.ModelViewSet):
+class ServicioViewSet(RegistroDeCambiosMixin, viewsets.ModelViewSet):
     serializer_class = ServicioSerializer
     permission_classes = [IsAuthenticated, LecturaAutenticadaEscrituraAdmin]
     search_fields = ['nombre']
     ordering_fields = ['nombre', 'duracion_minutos']
+    recurso_log = 'servicio'
 
     def get_queryset(self):
         queryset = Servicio.objects.all()
