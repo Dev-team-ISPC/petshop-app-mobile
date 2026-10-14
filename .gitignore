@@ -56,3 +56,7 @@ ehthumbs.db
 # ---------------------------------------------------------------
 logs/
 *.log
+# Respaldos y variantes de entorno: nunca se versionan
+*.bak
+.env.*
+!.env.example
