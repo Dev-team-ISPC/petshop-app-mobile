@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Confirmación de envío del formulario de contacto -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingStart="24dp"
+    android:paddingTop="24dp"
+    android:paddingEnd="24dp">
+
+    <TextView
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@drawable/fondo_avatar"
+        android:backgroundTint="@color/confirmado_fondo"
+        android:gravity="center"
+        android:importantForAccessibility="no"
+        android:text="✓"
+        android:textColor="@color/confirmado_texto"
+        android:textSize="30sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tituloEnviado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:accessibilityLiveRegion="polite"
+        android:text="@string/titulo_mensaje_enviado"
+        android:textColor="@color/texto"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:gravity="center"
+        android:text="@string/msg_mensaje_enviado"
+        android:textColor="@color/texto_medio"
+        android:textSize="15sp" />
+</LinearLayout>

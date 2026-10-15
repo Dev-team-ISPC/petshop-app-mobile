@@ -1,20 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  Registrar vacunación — RF07
-
-  Esqueleto para que el proyecto compile y navegue desde el primer commit.
-  Reemplazá el contenido por la pantalla real.
-
-  Usá los estilos ya definidos para que las 14 pantallas se vean iguales:
-      style="@style/Etiqueta"        etiqueta sobre un campo
-      style="@style/Campo"           EditText o Spinner
-      style="@style/BotonPrimario"   botón azul principal
-      style="@style/BotonSecundario" botón con borde
-      @drawable/fondo_tarjeta        tarjeta de una lista
-
-  Accesibilidad (RNF13): todo ícono sin texto necesita contentDescription
-  y 48dp de área táctil.
--->
+<!-- Registrar vacunación — RF05. Sólo veterinario. -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -27,14 +12,93 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoVacuna" android:text="@string/campo_vacuna" />
+        <Spinner
+            android:id="@+id/campoVacuna"
+            style="@style/Campo"
+            android:layout_marginBottom="4dp"
+            android:contentDescription="@string/campo_vacuna" />
         <TextView
-            android:id="@+id/placeholder"
+            android:id="@+id/ayudaFrecuencia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="24dp"
-            android:text="Registrar vacunación — RF07"
+            android:layout_marginBottom="16dp"
             android:textColor="@color/texto_suave"
-            android:textSize="16sp" />
+            android:textSize="13sp"
+            android:visibility="gone" />
 
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoAplicacion" android:text="@string/campo_fecha_aplicacion" />
+        <EditText
+            android:id="@+id/campoAplicacion"
+            style="@style/Campo"
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+            android:focusableInTouchMode="false"
+            android:hint="@string/hint_fecha"
+            android:importantForAutofill="no"
+            android:inputType="none" />
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoProxima" android:text="@string/campo_proxima_dosis" />
+        <EditText
+            android:id="@+id/campoProxima"
+            style="@style/Campo"
+            android:clickable="true"
+            android:cursorVisible="false"
+            android:drawableEnd="@android:drawable/ic_menu_my_calendar"
+            android:focusableInTouchMode="false"
+            android:hint="@string/hint_fecha"
+            android:importantForAutofill="no"
+            android:inputType="none"
+            android:layout_marginBottom="4dp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/ayuda_proxima_dosis"
+            android:textColor="@color/texto_suave"
+            android:textSize="13sp" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoVeterinario" android:text="@string/campo_veterinario" />
+        <EditText
+            android:id="@+id/campoVeterinario"
+            style="@style/Campo"
+            android:backgroundTint="@color/fondo_suave"
+            android:enabled="false"
+            android:importantForAutofill="no"
+            android:inputType="none"
+            android:textColor="@color/texto_medio" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/fondo_tarjeta"
+            android:padding="12dp"
+            android:text="@string/nota_solo_veterinario"
+            android:textColor="@color/texto_medio"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textoError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:accessibilityLiveRegion="polite"
+            android:textColor="@color/peligro"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonGuardar"
+            style="@style/BotonPrimario"
+            android:text="@string/accion_guardar_vacunacion" />
+
+        <ProgressBar
+            android:id="@+id/progreso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
     </LinearLayout>
 </ScrollView>

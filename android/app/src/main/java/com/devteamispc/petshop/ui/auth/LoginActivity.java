@@ -3,7 +3,6 @@ package com.devteamispc.petshop.ui.auth;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Patterns;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -15,6 +14,7 @@ import com.devteamispc.petshop.data.model.LoginResponse;
 import com.devteamispc.petshop.databinding.ActivityLoginBinding;
 import com.devteamispc.petshop.ui.BaseActivity;
 import com.devteamispc.petshop.ui.home.HomeActivity;
+import com.devteamispc.petshop.util.Validaciones;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -31,6 +31,9 @@ import retrofit2.Response;
  */
 public class LoginActivity extends BaseActivity {
 
+    /** Email recién registrado, para dejarlo escrito y que sólo falte la contraseña. */
+    public static final String EXTRA_EMAIL = "email";
+
     private ActivityLoginBinding vista;
 
     @Override
@@ -45,9 +48,25 @@ public class LoginActivity extends BaseActivity {
             return;
         }
 
+        precargarEmail(getIntent());
         vista.botonIngresar.setOnClickListener(v -> intentarLogin());
         vista.linkRegistro.setOnClickListener(v ->
                 startActivity(new Intent(this, RegistroActivity.class)));
+    }
+
+    /** Al volver del Registro, el Login ya abierto recibe el email por acá. */
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        precargarEmail(intent);
+    }
+
+    private void precargarEmail(Intent intent) {
+        String email = intent.getStringExtra(EXTRA_EMAIL);
+        if (email == null) return;
+        vista.campoEmail.setText(email);
+        vista.campoPassword.setText("");
+        vista.campoPassword.requestFocus();
     }
 
     private void intentarLogin() {
@@ -98,7 +117,7 @@ public class LoginActivity extends BaseActivity {
             vista.campoEmail.requestFocus();
             return false;
         }
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!Validaciones.emailValido(email)) {
             vista.campoEmail.setError("El email no es válido");
             vista.campoEmail.requestFocus();
             return false;

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Textos de Registro, Perfil, Contacto y Quiénes somos, aparte de strings.xml -->
+<resources>
+    <!-- Registro -->
+    <string name="titulo_reglas_password">La contraseña debe tener:</string>
+    <string name="regla_largo">Más de 8 caracteres</string>
+    <string name="regla_mayusculas">Mayúsculas y minúsculas</string>
+    <string name="regla_numero">Al menos un número</string>
+    <string name="regla_especial">Al menos un carácter especial</string>
+    <string name="regla_cumple">Cumple: %1$s</string>
+    <string name="regla_falta">Falta: %1$s</string>
+    <string name="accion_leer_terminos">Leer términos y política de privacidad</string>
+    <string name="error_terminos">Para crear la cuenta tenés que aceptar los términos y la política de privacidad.</string>
+    <string name="msg_rol_cliente">La cuenta se crea siempre con rol cliente.</string>
+    <string name="msg_cuenta_creada_ingresa">Cuenta creada. Ingresá con tu email y contraseña.</string>
+    <string name="accion_aceptar">Aceptar</string>
+    <string name="accion_cerrar">Cerrar</string>
+
+    <string name="titulo_terminos">Términos y Política de Privacidad</string>
+    <string name="texto_terminos">QUÉ DATOS GUARDAMOS\nTu nombre, correo electrónico, teléfono y dirección, y los datos de las mascotas que registres: nombre, especie, raza, peso y fecha de nacimiento.\n\nPARA QUÉ LOS USAMOS\nPara gestionar turnos, registrar el esquema de vacunación de cada mascota y mostrarte la agenda de próximas dosis. No se usan con fines publicitarios ni se ceden a terceros.\n\nQUIÉN PUEDE VERLOS\nSólo vos accedés a tus mascotas. El personal veterinario accede a la historia clínica para registrar la atención. La administración gestiona cuentas y turnos, y puede consultar la historia clínica, pero no modificarla.\n\nTU CONTRASEÑA\nSe guarda cifrada: nadie, ni siquiera la administración, puede leerla.\n\nTUS DERECHOS\nPodés consultar y corregir tus datos desde Mi perfil, y eliminar tu cuenta cuando quieras desde la misma pantalla. Al eliminarla se borran tus datos, tus mascotas y su historial, conforme a la Ley 25.326 de Protección de los Datos Personales.</string>
+
+    <!-- Perfil -->
+    <string name="ayuda_email_fijo">El email no se puede modificar.</string>
+    <string name="titulo_eliminar_cuenta">Eliminar mi cuenta</string>
+    <string name="msg_eliminar_cuenta_detalle">Se eliminan tu cuenta, tus mascotas y su historial. Vas a perder el acceso a la aplicación y no vas a poder volver a iniciar sesión con este email.</string>
+    <string name="msg_no_se_puede_deshacer">La acción no se puede deshacer.</string>
+    <string name="etiqueta_confirmar_eliminar">Escribí ELIMINAR para confirmar</string>
+    <string name="palabra_eliminar">ELIMINAR</string>
+    <string name="msg_cuenta_eliminada">Tu cuenta fue eliminada.</string>
+
+    <!-- Contacto -->
+    <string name="subtitulo_quienes_somos">Nuestra historia y horarios</string>
+    <string name="ayuda_minimo_mensaje">Mínimo 10 caracteres</string>
+    <string name="contador_mensaje">%1$d / %2$d</string>
+    <string name="error_mensaje">El mensaje debe tener entre %1$d y %2$d caracteres.</string>
+    <string name="msg_sin_app">No hay ninguna aplicación instalada para abrir esto.</string>
+    <string name="msg_demasiados_mensajes">Enviaste muchos mensajes seguidos. Probá de nuevo en un rato.</string>
+    <string name="titulo_mensaje_enviado">Mensaje enviado</string>
+    <string name="msg_mensaje_enviado">Tu consulta quedó registrada y la va a leer la clínica. Si dejaste tu email, te responden por ahí.</string>
+    <string name="accion_ir_al_inicio">Ir al inicio</string>
+    <string name="accion_volver_a_contacto">Volver a Contacto</string>
+
+    <!-- Datos institucionales (Contacto y Quiénes somos) -->
+    <string name="institucional_direccion">Av. Siempre Viva 123, Córdoba</string>
+    <string name="institucional_telefono">351 123-4567</string>
+    <string name="institucional_email">contacto@petshop.com</string>
+    <string name="institucional_horario">Lunes a sábado, de 9 a 19 h</string>
+
+    <!-- Quiénes somos -->
+    <string name="desc_imagen_institucional">Logo de la veterinaria: una huella blanca con una cruz de salud, sobre fondo azul.</string>
+    <string name="qs_titulo">Cuidamos a tu mascota desde 2015</string>
+    <string name="qs_parrafo_1">Somos una veterinaria de barrio con consultorio propio, atención clínica, vacunación y peluquería. Llevamos el historial sanitario de cada animal para que nada se pierda en papeles.</string>
+    <string name="qs_parrafo_2">Esta aplicación nació para que cada dueño tenga la libreta de su mascota a mano: vacunas aplicadas, próximas dosis y turnos, siempre disponibles.</string>
+</resources>

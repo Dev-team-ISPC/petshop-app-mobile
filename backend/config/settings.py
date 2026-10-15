@@ -154,7 +154,47 @@ REST_FRAMEWORK = {
         'login': '20/hour',
         'registro': '10/hour',
     },
+    # Registra 403 y 429 en el log de seguridad, y devuelve 409 (no 500)
+    # al borrar un registro que está en uso.
+    'EXCEPTION_HANDLER': 'api.excepciones.manejar_excepcion',
 }
+
+# Registros de seguridad (TK-S2-15). Una línea JSON por evento en la salida
+# estándar (Render la muestra en Logs). En local se puede sumar un archivo
+# rotativo con SECURITY_LOG_FILE=logs/seguridad.log
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'linea_json': {'format': '%(message)s'},
+    },
+    'handlers': {
+        'consola_seguridad': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'linea_json',
+        },
+    },
+    'loggers': {
+        'petshop.seguridad': {
+            'handlers': ['consola_seguridad'],
+            'level': 'INFO',
+            'propagate': False,
+        },
+    },
+}
+
+SECURITY_LOG_FILE = env('SECURITY_LOG_FILE', default='')
+if SECURITY_LOG_FILE:
+    os.makedirs(os.path.dirname(os.path.join(BASE_DIR, SECURITY_LOG_FILE)), exist_ok=True)
+    LOGGING['handlers']['archivo_seguridad'] = {
+        'class': 'logging.handlers.RotatingFileHandler',
+        'filename': os.path.join(BASE_DIR, SECURITY_LOG_FILE),
+        'maxBytes': 1024 * 1024,
+        'backupCount': 5,
+        'encoding': 'utf-8',
+        'formatter': 'linea_json',
+    }
+    LOGGING['loggers']['petshop.seguridad']['handlers'].append('archivo_seguridad')
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=env('ACCESS_TOKEN_MINUTES')),
