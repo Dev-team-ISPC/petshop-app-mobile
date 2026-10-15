@@ -2,8 +2,6 @@ package com.devteamispc.petshop.data.api;
 
 import androidx.annotation.Nullable;
 
-import com.devteamispc.petshop.data.local.SessionManager;
-import com.devteamispc.petshop.data.model.RefreshRequest;
 import com.devteamispc.petshop.data.model.RefreshResponse;
 
 import java.io.IOException;
@@ -23,11 +21,23 @@ import okhttp3.Route;
  */
 public class TokenAuthenticator implements Authenticator {
 
+    /** Pide un access nuevo con el refresh. Devuelve null si el servidor lo rechaza. */
+    public interface Renovador {
+        RefreshResponse renovar(String refresh) throws IOException;
+    }
+
+    private final AlmacenTokens sesion;
+    private final Renovador renovador;
+
+    public TokenAuthenticator(AlmacenTokens tokens, Renovador renovador) {
+        this.sesion = tokens;
+        this.renovador = renovador;
+    }
+
     @Nullable
     @Override
     public Request authenticate(@Nullable Route route, Response response) throws IOException {
-        SessionManager sesion = SessionManager.getSinContexto();
-        if (sesion == null || sesion.getRefresh() == null) {
+        if (sesion.getRefresh() == null) {
             return null;
         }
 
@@ -48,19 +58,17 @@ public class TokenAuthenticator implements Authenticator {
                         .build();
             }
 
-            retrofit2.Response<RefreshResponse> r = ApiClient.getApiSinAuth()
-                    .refresh(new RefreshRequest(sesion.getRefresh()))
-                    .execute();
+            RefreshResponse nuevos = renovador.renovar(sesion.getRefresh());
 
-            if (!r.isSuccessful() || r.body() == null) {
+            if (nuevos == null) {
                 sesion.cerrarSesion();
                 return null;
             }
 
-            sesion.actualizarTokens(r.body().getAccess(), r.body().getRefresh());
+            sesion.actualizarTokens(nuevos.getAccess(), nuevos.getRefresh());
 
             return response.request().newBuilder()
-                    .header("Authorization", "Bearer " + r.body().getAccess())
+                    .header("Authorization", "Bearer " + nuevos.getAccess())
                     .build();
         }
     }

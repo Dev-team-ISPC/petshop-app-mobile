@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Textos de Consultas y del catálogo de Vacunas -->
+<resources>
+    <string name="titulo_consultas">Consultas</string>
+    <string name="titulo_vacunas">Vacunas</string>
+    <string name="titulo_vacuna_nueva">Nueva vacuna</string>
+
+    <!-- Consultas -->
+    <string name="filtro_todas">Todas</string>
+    <string name="filtro_sin_leer">Sin leer</string>
+    <string name="filtro_sin_leer_n">Sin leer (%1$d)</string>
+    <string name="vacio_consultas">No hay consultas para mostrar.</string>
+    <string name="accion_marcar_leida">Marcar como leída</string>
+    <string name="msg_consulta_leida">Consulta marcada como leída</string>
+    <string name="asunto_respuesta_consulta">Respuesta a tu consulta — Petshop</string>
+    <string name="desc_consulta_sin_leer">%1$s, sin leer</string>
+    <string name="desc_responder_a">Responder por correo a %1$s</string>
+
+    <!-- Vacunas -->
+    <string name="hint_buscar_vacuna">Buscar vacuna</string>
+    <string name="desc_nueva_vacuna_catalogo">Nueva vacuna en el catálogo</string>
+    <string name="vacio_vacunas_catalogo">El catálogo está vacío.</string>
+    <string name="vacuna_sin_descripcion">Sin descripción.</string>
+    <string name="vacuna_detalle">Frecuencia: %1$s\n\n%2$s</string>
+    <string name="accion_eliminar_vacuna">Eliminar</string>
+    <string name="titulo_eliminar_vacuna">¿Eliminar la vacuna del catálogo?</string>
+    <string name="msg_eliminar_vacuna">Si ya fue aplicada a alguna mascota no se va a poder eliminar, para conservar la historia clínica.</string>
+    <string name="msg_vacuna_con_aplicaciones">Esta vacuna ya fue aplicada a alguna mascota. Se conserva en el catálogo para no perder la historia clínica.</string>
+    <string name="msg_vacuna_eliminada">Vacuna eliminada del catálogo</string>
+    <string name="msg_vacuna_creada">Vacuna agregada al catálogo</string>
+    <string name="msg_solo_veterinario_catalogo">Sólo el veterinario gestiona el catálogo de vacunas.</string>
+    <string name="hint_nombre_vacuna">Ej.: Séxtuple canina</string>
+    <string name="hint_descripcion_vacuna">Qué previene y a qué especie se aplica</string>
+    <string name="campo_frecuencia_meses">Frecuencia (meses)</string>
+    <string name="ayuda_frecuencia">Con esto se sugiere la próxima dosis cada vez que se registra una aplicación.</string>
+    <string name="error_frecuencia">Ingresá entre 1 y %1$d meses.</string>
+
+    <!-- Home -->
+    <string name="home_detalle_vacunas">Catálogo</string>
+    <plurals name="home_consultas_sin_leer">
+        <item quantity="one">%d sin leer</item>
+        <item quantity="other">%d sin leer</item>
+    </plurals>
+</resources>

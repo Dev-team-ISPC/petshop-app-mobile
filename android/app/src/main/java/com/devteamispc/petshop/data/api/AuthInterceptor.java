@@ -2,7 +2,6 @@ package com.devteamispc.petshop.data.api;
 
 import androidx.annotation.NonNull;
 
-import com.devteamispc.petshop.data.local.SessionManager;
 
 import java.io.IOException;
 
@@ -16,13 +15,18 @@ import okhttp3.Response;
  */
 public class AuthInterceptor implements Interceptor {
 
+    private final AlmacenTokens tokens;
+
+    public AuthInterceptor(AlmacenTokens tokens) {
+        this.tokens = tokens;
+    }
+
     @NonNull
     @Override
     public Response intercept(@NonNull Chain chain) throws IOException {
         Request original = chain.request();
 
-        SessionManager sesion = SessionManager.getSinContexto();
-        String token = sesion == null ? null : sesion.getAccess();
+        String token = tokens.getAccess();
 
         // Login, registro, refresh y el envío de contacto son públicos.
         if (token == null || esPublico(original)) {

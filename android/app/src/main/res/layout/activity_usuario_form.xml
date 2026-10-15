@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Alta y edición de usuario (CRUD 1).
+  Cada campo tiene su etiqueta visible con labelFor (accesibilidad) y los
+  errores se muestran con setError(), que TalkBack anuncia.
+-->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/blanco"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoNombre" android:text="@string/campo_nombre" />
+        <EditText
+            android:id="@+id/campoNombre"
+            style="@style/Campo"
+            android:autofillHints="name"
+            android:hint="@string/hint_nombre"
+            android:inputType="textPersonName|textCapWords" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoEmail" android:text="@string/campo_email" />
+        <EditText
+            android:id="@+id/campoEmail"
+            style="@style/Campo"
+            android:autofillHints="emailAddress"
+            android:hint="@string/hint_email"
+            android:inputType="textEmailAddress" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoTelefono" android:text="@string/campo_telefono" />
+        <EditText
+            android:id="@+id/campoTelefono"
+            style="@style/Campo"
+            android:autofillHints="phone"
+            android:inputType="phone" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoDireccion" android:text="@string/campo_direccion" />
+        <EditText
+            android:id="@+id/campoDireccion"
+            style="@style/Campo"
+            android:autofillHints="postalAddress"
+            android:inputType="textPostalAddress" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoRol" android:text="@string/campo_rol" />
+        <Spinner
+            android:id="@+id/campoRol"
+            style="@style/Campo"
+            android:contentDescription="@string/campo_rol" />
+
+        <TextView style="@style/Etiqueta" android:labelFor="@id/campoPassword" android:text="@string/campo_password" />
+        <EditText
+            android:id="@+id/campoPassword"
+            style="@style/Campo"
+            android:layout_marginBottom="4dp"
+            android:autofillHints="newPassword"
+            android:hint="@string/hint_password"
+            android:inputType="textPassword" />
+        <TextView
+            android:id="@+id/ayudaPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/texto_suave"
+            android:textSize="13sp" />
+
+        <com.google.android.material.switchmaterial.SwitchMaterial
+            android:id="@+id/campoActivo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:text="@string/campo_usuario_activo"
+            android:textColor="@color/texto"
+            android:textSize="16sp" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/ayuda_activo_usuario"
+            android:textColor="@color/texto_suave"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/textoError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:accessibilityLiveRegion="polite"
+            android:textColor="@color/peligro"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/botonGuardar"
+            style="@style/BotonPrimario"
+            android:text="@string/accion_guardar" />
+
+        <ProgressBar
+            android:id="@+id/progreso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/bloqueEliminar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                style="@style/Etiqueta"
+                android:text="@string/titulo_zona_peligro"
+                android:textColor="@color/peligro"
+                android:textStyle="bold" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/botonEliminar"
+                style="@style/BotonSecundario"
+                android:text="@string/accion_eliminar_usuario"
+                android:textColor="@color/peligro"
+                app:strokeColor="@color/peligro_borde" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

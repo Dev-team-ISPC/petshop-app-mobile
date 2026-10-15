@@ -16,3 +16,6 @@ media/
 # Editores
 .vscode/
 .idea/
+
+# Registros de seguridad locales
+logs/
