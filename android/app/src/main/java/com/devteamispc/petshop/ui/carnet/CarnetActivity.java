@@ -24,7 +24,6 @@ import com.devteamispc.petshop.ui.BaseActivity;
 import com.devteamispc.petshop.ui.mascota.MascotaFormActivity;
 import com.devteamispc.petshop.ui.turno.TurnoFormActivity;
 import com.devteamispc.petshop.ui.vacunacion.VacunacionFormActivity;
-import com.devteamispc.petshop.util.Barra;
 import com.devteamispc.petshop.util.Fechas;
 import com.google.android.material.tabs.TabLayout;
 
@@ -49,7 +48,7 @@ import retrofit2.Response;
  *   Turnos  -> sólo cliente (solicitar turno)
  * El administrador sólo consulta: no ve botones de alta.
  *
- * Arriba, el subtítulo con especie, raza y peso (o el dueño, para el personal),
+ * Arriba, una franja con especie, raza y peso (o el dueño, para el personal),
  * y en el menú "Editar mascota" para el dueño y el veterinario.
  * En la pestaña Turnos, el cliente puede cancelar los suyos (no se borran:
  * quedan registrados como cancelados).
@@ -95,7 +94,7 @@ public class CarnetActivity extends BaseActivity {
             return;
         }
 
-        setTitle(getString(R.string.titulo_carnet) + ": " + mascotaNombre);
+        mostrarTitulo();
 
         adapterTurnos = new TurnoAdapter(sesion.esCliente(), this::confirmarCancelacion);
         vista.lista.setLayoutManager(new LinearLayoutManager(this));
@@ -128,7 +127,17 @@ public class CarnetActivity extends BaseActivity {
         cargarTurnos();
     }
 
-    /** Datos de la mascota para el título y el subtítulo (pudo cambiar al editarla). */
+    /**
+     * Una sola línea en la barra: con título y subtítulo, la barra de altura
+     * fija los superponía al agrandar la letra (BUG-ACC-04).
+     */
+    private void mostrarTitulo() {
+        setTitle(mascotaNombre != null
+                ? getString(R.string.carnet_titulo, mascotaNombre)
+                : getString(R.string.titulo_carnet));
+    }
+
+    /** Datos de la mascota para el título y la franja de datos (pudo cambiar al editarla). */
     private void cargarMascota() {
         ApiClient.getApi().mascota(mascotaId).enqueue(new Callback<Mascota>() {
             @Override
@@ -137,19 +146,20 @@ public class CarnetActivity extends BaseActivity {
                 if (!respuesta.isSuccessful() || respuesta.body() == null) return;
                 Mascota m = respuesta.body();
                 mascotaNombre = m.getNombre();
-                setTitle(getString(R.string.titulo_carnet) + ": " + mascotaNombre);
-                String subtitulo = m.getEspecieDisplay() + " · " + m.getRaza();
+                mostrarTitulo();
+                String datos = m.getEspecieDisplay() + " · " + m.getRaza();
                 if (sesion.esCliente()) {
-                    if (m.getPeso() != null) subtitulo += " · " + m.getPeso().replace('.', ',') + " kg";
+                    if (m.getPeso() != null) datos += " · " + m.getPeso().replace('.', ',') + " kg";
                 } else if (m.getDuenoNombre() != null) {
-                    subtitulo += " · " + getString(R.string.carnet_dueno, m.getDuenoNombre());
+                    datos += " · " + getString(R.string.carnet_dueno, m.getDuenoNombre());
                 }
-                Barra.subtitulo(CarnetActivity.this, subtitulo);
+                vista.datosMascota.setText(datos);
+                vista.datosMascota.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFailure(@NonNull Call<Mascota> call, @NonNull Throwable t) {
-                // Sin subtítulo: el resto del carnet avisa si no hay conexión.
+                // Sin franja de datos: el resto del carnet avisa si no hay conexión.
             }
         });
     }

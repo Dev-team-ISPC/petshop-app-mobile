@@ -3,6 +3,10 @@
   Carnet sanitario de una mascota — RF06
   Pestañas Vacunas y Turnos sobre una misma lista: CarnetActivity cambia el
   adapter según la pestaña elegida.
+
+  Especie, raza y peso (o el dueño) van en una franja propia y no como
+  subtítulo de la barra: la barra tiene altura fija y con letra grande el
+  título y el subtítulo se superponían (BUG-ACC-04). La franja crece con el texto.
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -10,6 +14,19 @@
     android:layout_height="match_parent"
     android:background="@color/blanco"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/datosMascota"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/azul_claro"
+        android:paddingStart="16dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="10dp"
+        android:textColor="@color/texto"
+        android:textSize="15sp"
+        android:visibility="gone" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/pestanas"
