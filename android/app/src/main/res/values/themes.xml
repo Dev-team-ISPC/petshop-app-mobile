@@ -11,11 +11,15 @@
         <item name="android:windowBackground">@color/blanco</item>
     </style>
 
-    <!-- Pantallas con barra azul y título -->
+    <!-- Pantallas con barra azul y título.
+         colorSecondary es el color del botón +: sin él, Material usa el verde
+         agua por defecto (#03DAC6, 1,77:1 con el blanco: BUG-ACC-01). -->
     <style name="Theme.Petshop.ConBarra" parent="Theme.MaterialComponents.Light.DarkActionBar">
         <item name="colorPrimary">@color/azul</item>
         <item name="colorPrimaryVariant">@color/azul_oscuro</item>
         <item name="colorOnPrimary">@color/blanco</item>
+        <item name="colorSecondary">@color/azul</item>
+        <item name="colorOnSecondary">@color/blanco</item>
         <item name="android:statusBarColor" tools:targetApi="l">@color/azul_oscuro</item>
         <item name="android:windowBackground">@color/blanco</item>
     </style>
