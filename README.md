@@ -17,8 +17,8 @@ Facilitar el seguimiento y la trazabilidad de la salud y los cuidados de las mas
 | | |
 |---|---|
 | **APK** | [Última versión en Releases](https://github.com/Dev-team-ISPC/petshop-app-mobile/releases/latest) |
-| **Video de demostración** | *(enlace)* |
-| **Video de autenticación y autorización** | *(enlace)* |
+| **Video de demostración** | [Ver en Drive](https://drive.google.com/file/d/16c9s9x3hpeIohC30naFHlJGf9KNXWGHz/view): registro, cliente, veterinario y administrador |
+| **Video de autenticación y autorización** | [Ver en Drive](https://drive.google.com/file/d/1WFYJksobAN51jrYDFnHipjOuClYiccB4/view) (2:47) |
 | **API desplegada** | `https://petshop-api-sk23.onrender.com/api/` |
 
 > El servidor usa el plan gratuito de Render: si estuvo 15 minutos sin uso, la primera respuesta tarda hasta un minuto. La pantalla de inicio de la app lo despierta antes de mostrar el login.
@@ -148,10 +148,10 @@ Contraseña de todas: `Petshop2026!`
 |---|---|---|
 | Unitarios y de red (app) | 107 | `cd android` y `.\gradlew.bat testDebugUnitTest` |
 | Flujos de Espresso + accesibilidad | 7 | `.\gradlew.bat connectedDebugAndroidTest` (con emulador) |
-| Backend | 8 | `cd backend` y `python manage.py test api` (con `config.settings_pruebas`) |
+| Backend (seguridad, IDOR y minimización de datos) | 16 | `cd backend` y `python manage.py test api` (con `config.settings_pruebas`) |
 | API (Postman + Newman) | 53 pedidos, 247 verificaciones | Ver [`tests/api/README.md`](tests/api/README.md) |
 
-El pipeline corre los tests unitarios y la colección de Postman en cada push y en cada Pull Request a `main`, `develop` y `release`. Estrategia, resultados y trazabilidad en la página [Testing](https://github.com/Dev-team-ISPC/petshop-app-mobile/wiki/Testing) de la Wiki.
+El pipeline corre los tests unitarios de la app, los tests del backend y la colección de Postman en cada push y en cada Pull Request a `main`, `develop` y `release`. Estrategia, resultados y trazabilidad en la página [Testing](https://github.com/Dev-team-ISPC/petshop-app-mobile/wiki/Testing) de la Wiki.
 
 ---
 
@@ -190,7 +190,6 @@ El pipeline corre los tests unitarios y la colección de Postman en cada push y 
 Lo que todavía no está resuelto, para que nada de este README prometa algo que la app no hace:
 
 - **Turnos:** la app no le ofrece al administrador confirmar o completar turnos, pero la API todavía se lo permite. Se corrige en el Sprint 3.
-- **Lista de veterinarios:** el endpoint devuelve más datos de los necesarios (email, teléfono). Se reduce a id y nombre en el Sprint 3.
 - **Sesión en el teléfono:** se guarda en almacenamiento privado de la app, sin cifrar, porque el cifrado nativo requiere Android 6 y la app soporta desde Android 5.
 - **Pruebas:** no hay pruebas E2E con Appium ni cobertura medida; los flujos de Espresso corren en local, no en el pipeline.
 - **Servidor:** la primera respuesta después de un rato sin uso puede tardar hasta un minuto (plan gratuito de Render).
