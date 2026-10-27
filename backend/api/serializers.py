@@ -25,6 +25,18 @@ class UsuarioSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'date_joined']
 
 
+class VeterinarioSerializer(serializers.ModelSerializer):
+    """
+    Para los selectores: minimización de datos. Email, teléfono y dirección
+    del profesional no hacen falta para elegirlo.
+    """
+
+    class Meta:
+        model = Usuario
+        fields = ['id', 'nombre']
+        read_only_fields = fields
+
+
 class UsuarioEscrituraSerializer(serializers.ModelSerializer):
     """Alta y edición de usuarios desde el panel de administración."""
 

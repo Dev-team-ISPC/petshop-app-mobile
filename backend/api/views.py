@@ -28,6 +28,7 @@ from .serializers import (
     MascotaSerializer, PerfilSerializer, ProductoSerializer, ProximaDosisSerializer,
     RegistroSerializer, ServicioSerializer, TurnoAgendaSerializer, TurnoSerializer,
     UsuarioEscrituraSerializer, UsuarioSerializer, VacunaSerializer, VacunacionSerializer,
+    VeterinarioSerializer,
 )
 
 
@@ -208,10 +209,13 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
     @action(detail=False, methods=['get'], permission_classes=[IsAuthenticated])
     def veterinarios(self, request):
-        """Lista de veterinarios para los selectores de la app."""
+        """
+        Lista de veterinarios para los selectores de la app.
+        La ve cualquier autenticado, así que sólo devuelve id y nombre (H2).
+        """
         queryset = Usuario.objects.filter(rol=Usuario.Rol.VETERINARIO, is_active=True)
         pagina = self.paginate_queryset(queryset)
-        serializer = UsuarioSerializer(pagina, many=True)
+        serializer = VeterinarioSerializer(pagina, many=True)
         return self.get_paginated_response(serializer.data)
 
 

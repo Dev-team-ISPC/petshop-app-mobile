@@ -1,8 +1,9 @@
 # Pipeline de pruebas automatizadas — Petshop App Mobile
 #
 #   app-unitarios : tests JVM de la app (AUT-UNIT y AUT-NET) con Gradle.
-#   api-newman    : levanta el backend con SQLite y los datos de prueba, y corre
-#                   la colección de Postman con Newman (AUT-API).
+#   api-newman    : corre los tests de Django; después levanta el backend con
+#                   SQLite y los datos de prueba, y corre la colección de Postman
+#                   con Newman (AUT-API).
 #
 # Los reportes quedan como artefactos de cada ejecución (pestaña Actions).
 
@@ -73,6 +74,9 @@ jobs:
         run: |
           grep -v mysqlclient requirements.txt > requirements-pruebas.txt
           pip install -r requirements-pruebas.txt
+
+      - name: Tests del backend (registros de seguridad, IDOR y veterinarios)
+        run: python manage.py test api --verbosity 2
 
       - name: Base de prueba y datos del seed
         run: |

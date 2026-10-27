@@ -3,6 +3,7 @@
 <resources>
     <string name="pestana_vacunas">Vacunas</string>
     <string name="pestana_turnos">Turnos</string>
+    <string name="carnet_titulo">Carnet de %1$s</string>
 
     <string name="carnet_aplicada">Aplicada: %1$s</string>
     <string name="carnet_aplico">Aplicó: %1$s</string>
